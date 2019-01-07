@@ -22,7 +22,7 @@
     <meta name="description" content="Better late than never">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MaoConghui</title>
+    <title>行程提取模型设计 · MaoConghui</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">MaoConghui</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">行程提取模型设计</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">MaoConghui</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/20190105154222.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            行程提取模型设计
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="行程提取  GoogleEarth">行程提取  GoogleEarth</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.7k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/01/05</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,37 +399,58 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/30/hello-world/">
-            
-                <span>Hello World</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/30</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>由于终端上报的经纬度会时刻变化，即使静止状态也会使里程有细微的变化，由于时间差不确定，所以根据速度来判断车辆处于运动或静止状态。</p>
+<h1 id="一、运动状态的判定条件"><a href="#一、运动状态的判定条件" class="headerlink" title="一、运动状态的判定条件"></a>一、运动状态的判定条件</h1><p>平均速度 &gt;= 0.45km/h；</p>
+<h1 id="二、静止状态的判定条件"><a href="#二、静止状态的判定条件" class="headerlink" title="二、静止状态的判定条件"></a>二、静止状态的判定条件</h1><p>平均速度 &lt; 0.45km/h；</p>
+<h1 id="三、设计流程"><a href="#三、设计流程" class="headerlink" title="三、设计流程"></a>三、设计流程</h1><h1 id="四、关键技术"><a href="#四、关键技术" class="headerlink" title="四、关键技术"></a>四、关键技术</h1><h2 id="1-判断运动状态和静止状态："><a href="#1-判断运动状态和静止状态：" class="headerlink" title="1.判断运动状态和静止状态："></a>1.判断运动状态和静止状态：</h2><p>平均速度大于等于0.45km/h的认为是运动状态，平均速度小于0.45km/h的认为是静止状态；</p>
+<h2 id="2-判断行程的起始点和结束点："><a href="#2-判断行程的起始点和结束点：" class="headerlink" title="2.判断行程的起始点和结束点："></a>2.判断行程的起始点和结束点：</h2><p>（1）在时间点A时，终端为静止状态，下一个时间点B终端为运动状态，则时间点A为行程的开始时间。因为在时间点B时，里程差大于0，表示AB这个时间段内终端开始运动；<br>（2）在时间点A时，终端为运动状态，下一个时间点B终端为静止状态，则时间点A为行程的结束时间。因为在时间点B时，里程差（一般）等于0，且平均速度小于阈值，表示AB这个时间段内终端不再运动；</p>
+<h2 id="3-异常数据："><a href="#3-异常数据：" class="headerlink" title="3.异常数据："></a>3.异常数据：</h2><p>（1）终端上报的里程为0的数据；<br>（2）终端上报的经纬度小于等于0的数据；<br>（3）里程差为0但经纬度之间的半正矢距离不为0的数据；<br>（4）平均速度大于200km/h小于260km/h的数据（定位偏差）；<br>（5）平均速度大于260km/h的数据（数据漂移）。</p>
+<h2 id="4-判断是否存在夜间行驶和疲劳驾驶："><a href="#4-判断是否存在夜间行驶和疲劳驾驶：" class="headerlink" title="4.判断是否存在夜间行驶和疲劳驾驶："></a>4.判断是否存在夜间行驶和疲劳驾驶：</h2><p>（1）获取夜间行驶的时间区间：当天23:00至第二天05:00；<br>（2）将疲劳驾驶和夜间行驶的字段初始化为0；<br>（3）若行程的起始点和结束点的时间区间与夜间行驶的时间区间存在交集且在交集中的时间差大于5分钟，则认为存在夜间行驶，反之则不存在；<br>（4）若行程的持续时间大于等于4小时，则认为存在疲劳驾驶。</p>
+<h1 id="五、详细设计思路"><a href="#五、详细设计思路" class="headerlink" title="五、详细设计思路"></a>五、详细设计思路</h1><p>1、获取获取车辆的GPS数据，将其转化为数据框；<br>2、过滤掉未定位和基站定位的数据，只选取卫星定位的数据；<br>3、过滤掉经纬度小于等于0的数据；<br>4、修正里程为0的异常数据：<br>（1）若第一个点的里程为0，则将其赋为和下一个不为0的点的值一样；<br>（2）若最后一个点的里程为0，则将其赋为和上一个点的值一样；<br>（3）若既不在第一个也不在最后一个：<br>①若该点的上下两个点不一样且下一个点不为0，则将其赋为和下一个值一样；<br>②反之，则将其赋为和上一个值一样。<br>5、将发生了漂移的数据（即相邻两个时间点的平均速度大于等于260km/h）删除；<br>6、求出相邻两个经纬度之间的半正矢距离；<br>7、求出相邻两个时间点之间的里程差的绝对值；<br>8、若里程差为0但半正矢距离不为0，则将半正矢距离赋值给里程差；<br>9、求出相邻两个时间点之间的平均速度和时间差；<br>10、将速度大于200km/h的里程差用（阈值*时间差）来表示，且速度都赋为200km/h；<br>11、将速度大于260km/h的里程差用半正矢距离来表示，且求出此时的平均速度；<br>12、对里程差求累加和；<br>13、将平均速度小于0.45km/h的时间点的状态设为0，表示为静止状态，反之则设为1，表示为运动状态；<br>14、将一段连续的时间差大于301s的时间点的状态设为0，且保留最后一个时间点，因为最后一个时间点可能为下一段行程的开始时间；<br>15、对状态求差分，将最后一个0和最后一个1分别标记为-1和1，表示为一段行程的起始点和结束点；<br>16、若最后一个时间点的状态为运动状态，则将其定义为结束点，状态设为1，否则设为0；<br>17、保证起始点和终点的个数一致：<br>（1）若第一个状态差为1 表示第一个点为运动状态，下一个点为静止状态，无法构成一段行程，则将第一个状态差赋值为0；<br>（2）若第一个状态差为0且状态为1，表示该点与下一点都为运动状态，可以构成一段行程，则将第一个状态差赋值为-1，表示为起始点。<br>18、定义两个数据框，分别存放行程的起始点和结束点；<br>19、求出一段行程的结束时间和下一段行程的开始时间之间的时间差，将时间差小于301秒的两个行程合并成一个行程；<br>20、拼接两个数据框，得到最后的行程信息，并判断是否存在夜间行驶和疲劳驾驶行为，左后得到的行程信息中包含行程的开始索引、结束索引、开始时间、结束时间、开始的经纬度、结束的经纬度、持续时间、这段行程的里程、平均速度、是否存在夜间行驶和是否存在疲劳驾驶；<br>21、过滤掉里程小于500米或者持续时间小于5分钟的行程；<br>22、将得到的行程的起始和结束经纬度交叉合并到一个新的数据框中，用于行程提取的可视化；<br>23、若得到的第一条行程的开始时间与之前写入数据库中的该车辆的最后一条行程的结束时间之间的时间差小于等于301秒，则将这两条行程进行合并，即将数据库中该车辆的最后一条行程的结束时间改为当前得到的第一条行程的结束时间，里程、持续时间和速度也相应进行改变，并删除当前得到的第一条行程；<br>24、将剩下的行程信息写入到数据库。</p>
+<h1 id="六、行程提取结果"><a href="#六、行程提取结果" class="headerlink" title="六、行程提取结果"></a>六、行程提取结果</h1><p>呼号为64708329530，2018-08-27至2018-08-30四天的行程信息如下图所示。</p>
+<h1 id="七、行程可视化结果"><a href="#七、行程可视化结果" class="headerlink" title="七、行程可视化结果"></a>七、行程可视化结果</h1><p>将得到的行程在GoogleEarth上显示，如下图所示，其中红色的线为该终端2018-08-27至2018-08-30四天的路线，黄色的点为行程的起始点和结束点。</p>
+
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">MaoConghui</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/01/05/1/">http://yoursite.com/2019/01/05/1/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/01/05/1/">January 5th 2019, 3:57:22 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/01/05/1/">January 5th 2019, 4:58:42 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2018/12/03/article/" title="test">
+                    <div class="prevTitle">test</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -453,6 +535,24 @@ More...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、运动状态的判定条件"><span class="toc-number">1.</span> <span class="toc-text">一、运动状态的判定条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、静止状态的判定条件"><span class="toc-number">2.</span> <span class="toc-text">二、静止状态的判定条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、设计流程"><span class="toc-number">3.</span> <span class="toc-text">三、设计流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、关键技术"><span class="toc-number">4.</span> <span class="toc-text">四、关键技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-判断运动状态和静止状态："><span class="toc-number">4.1.</span> <span class="toc-text">1.判断运动状态和静止状态：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-判断行程的起始点和结束点："><span class="toc-number">4.2.</span> <span class="toc-text">2.判断行程的起始点和结束点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-异常数据："><span class="toc-number">4.3.</span> <span class="toc-text">3.异常数据：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-判断是否存在夜间行驶和疲劳驾驶："><span class="toc-number">4.4.</span> <span class="toc-text">4.判断是否存在夜间行驶和疲劳驾驶：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、详细设计思路"><span class="toc-number">5.</span> <span class="toc-text">五、详细设计思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、行程提取结果"><span class="toc-number">6.</span> <span class="toc-text">六、行程提取结果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七、行程可视化结果"><span class="toc-number">7.</span> <span class="toc-text">七、行程可视化结果</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -614,6 +714,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
