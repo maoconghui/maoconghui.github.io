@@ -404,7 +404,8 @@ height:50vh;
         <p>由于终端上报的经纬度会时刻变化，即使静止状态也会使里程有细微的变化，由于时间差不确定，所以根据速度来判断车辆处于运动或静止状态。</p>
 <h1 id="一、运动状态的判定条件"><a href="#一、运动状态的判定条件" class="headerlink" title="一、运动状态的判定条件"></a>一、运动状态的判定条件</h1><p>平均速度 &gt;= 0.45km/h；</p>
 <h1 id="二、静止状态的判定条件"><a href="#二、静止状态的判定条件" class="headerlink" title="二、静止状态的判定条件"></a>二、静止状态的判定条件</h1><p>平均速度 &lt; 0.45km/h；</p>
-<h1 id="三、设计流程"><a href="#三、设计流程" class="headerlink" title="三、设计流程"></a>三、设计流程</h1><h1 id="四、关键技术"><a href="#四、关键技术" class="headerlink" title="四、关键技术"></a>四、关键技术</h1><h2 id="1-判断运动状态和静止状态："><a href="#1-判断运动状态和静止状态：" class="headerlink" title="1.判断运动状态和静止状态："></a>1.判断运动状态和静止状态：</h2><p>平均速度大于等于0.45km/h的认为是运动状态，平均速度小于0.45km/h的认为是静止状态；</p>
+<h1 id="三、设计流程"><a href="#三、设计流程" class="headerlink" title="三、设计流程"></a>三、设计流程</h1><p><img src="file\\\D:\毛丛卉\maoconghui\source\_posts\photos" alt="流程图"></p>
+<h1 id="四、关键技术"><a href="#四、关键技术" class="headerlink" title="四、关键技术"></a>四、关键技术</h1><h2 id="1-判断运动状态和静止状态："><a href="#1-判断运动状态和静止状态：" class="headerlink" title="1.判断运动状态和静止状态："></a>1.判断运动状态和静止状态：</h2><p>平均速度大于等于0.45km/h的认为是运动状态，平均速度小于0.45km/h的认为是静止状态；</p>
 <h2 id="2-判断行程的起始点和结束点："><a href="#2-判断行程的起始点和结束点：" class="headerlink" title="2.判断行程的起始点和结束点："></a>2.判断行程的起始点和结束点：</h2><p>（1）在时间点A时，终端为静止状态，下一个时间点B终端为运动状态，则时间点A为行程的开始时间。因为在时间点B时，里程差大于0，表示AB这个时间段内终端开始运动；<br>（2）在时间点A时，终端为运动状态，下一个时间点B终端为静止状态，则时间点A为行程的结束时间。因为在时间点B时，里程差（一般）等于0，且平均速度小于阈值，表示AB这个时间段内终端不再运动；</p>
 <h2 id="3-异常数据："><a href="#3-异常数据：" class="headerlink" title="3.异常数据："></a>3.异常数据：</h2><p>（1）终端上报的里程为0的数据；<br>（2）终端上报的经纬度小于等于0的数据；<br>（3）里程差为0但经纬度之间的半正矢距离不为0的数据；<br>（4）平均速度大于200km/h小于260km/h的数据（定位偏差）；<br>（5）平均速度大于260km/h的数据（数据漂移）。</p>
 <h2 id="4-判断是否存在夜间行驶和疲劳驾驶："><a href="#4-判断是否存在夜间行驶和疲劳驾驶：" class="headerlink" title="4.判断是否存在夜间行驶和疲劳驾驶："></a>4.判断是否存在夜间行驶和疲劳驾驶：</h2><p>（1）获取夜间行驶的时间区间：当天23:00至第二天05:00；<br>（2）将疲劳驾驶和夜间行驶的字段初始化为0；<br>（3）若行程的起始点和结束点的时间区间与夜间行驶的时间区间存在交集且在交集中的时间差大于5分钟，则认为存在夜间行驶，反之则不存在；<br>（4）若行程的持续时间大于等于4小时，则认为存在疲劳驾驶。</p>
@@ -419,7 +420,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">MaoConghui</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/01/05/1/">http://yoursite.com/2019/01/05/1/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/01/05/1/">January 5th 2019, 3:57:22 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/01/05/1/">January 5th 2019, 4:58:42 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/01/05/1/">January 7th 2019, 6:45:18 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -644,8 +645,6 @@ top:50vh;
     <div class="sidebar-tags-name">
     
         <span class="sidebar-tag-name" data-tags="test 测试"><span class="iconfont-archer">&#xe606;</span>test 测试</span>
-    
-        <span class="sidebar-tag-name" data-tags="行程提取"><span class="iconfont-archer">&#xe606;</span>行程提取</span>
     
         <span class="sidebar-tag-name" data-tags="行程提取  GoogleEarth"><span class="iconfont-archer">&#xe606;</span>行程提取  GoogleEarth</span>
     
