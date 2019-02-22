@@ -364,12 +364,22 @@ height:50vh;
                 <span>行程提取模型设计</span>
         </a>
         <div class="abstract-content">
-            由于终端上报的经纬度会时刻变化，即使静止状态也会使里程有细微的变化，由于时间差不确定，所以根据速度来判断车辆处于运动或静止状态。
-一、运动状态的判定条件平均速度 &gt;= 0.45km/h；
-二、静止状态的判定条件平均速度 &lt; 0.45km/h；
+            前提说明：
+
+本测试数据中，设备上报的经纬度会时刻变化，即使静止状态也会使里程有细微的变化，且由于设备上报的点熄火状态会有异常，则忽略此特征。由于时间差不确定，所以根据速度来判断车辆处于运动或静止状态。
+
+一、运动状态的判定条件
+平均速度 &gt;= 0.45km/h；
+
+二、静止状态的判定条件
+平均速度 &lt; 0.45km/h；
+
 三、设计流程
-四、关键技术1.判断运动状态和静止状态：平均速度大于等于0.45km/h的认为是运动状态，平均速度小于0.45km/h的认为是静止状态；
-2.判断行程的起始点和结束点：（1）在时间点A时，终端为静止状态，下一个时间点B终端为运动状态，则时间点A为行程的开始时间。因为在时间点B时，里程差大于0，表示AB这个时间段内终端开始运...
+四、关键技术1.判断运动状态和静止状态：
+平均速度大于等于0.45km/h的认为是运动状态，平均速度小于0.45km/h的认为是静止状态；
+
+2.判断行程的起始点和结束点：
+（1）在时间点A时，终端为静止状态，下一个时间点B终端为运动状态，...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -394,6 +404,36 @@ height:50vh;
     
     <article class="index-post">
         <a class="abstract-title" href="/2018/12/03/article/">
+            
+                <span>test</span>
+        </a>
+        <div class="abstract-content">
+            优秀的人，不是不合群，而是他们合群的人里面没有你
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/03</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="test 测试">test 测试</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2018/12/03/article - 副本/">
             
                 <span>test</span>
         </a>
@@ -663,9 +703,16 @@ More...
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 3
+        Total : 4
         </div>
         <!-- search  -->
         
@@ -696,6 +743,11 @@ More...
     
         <li class="archive-post-item">
             <span class="archive-post-date">12/03</span><a class="archive-post-title" href="/2018/12/03/article/">test</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href="/2018/12/03/article - 副本/">test</a>
         </li>
     
     
