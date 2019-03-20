@@ -346,38 +346,218 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/01/05/1/">
+        <a class="abstract-title" href="/2019/03/20/Hadoop集群搭建之HBase安装/">
             
-                <span>行程提取模型设计</span>
+                <span>Hadoop集群搭建之HBase安装</span>
         </a>
         <div class="abstract-content">
-            前提说明：
+            三个节点都需要配置
+一 集群规划
 
-本测试数据中，设备上报的经纬度会时刻变化，即使静止状态也会使里程有细微的变化，且由于设备上报的点熄火状态会有异常，则忽略此特征。由于时间差不确定，所以根据速度来判断车辆处于运动或静止状态。
 
-一、运动状态的判定条件
-平均速度 &gt;= 0.45km/h；
+主机名
+IP
+集群规划
 
-二、静止状态的判定条件
-平均速度 &lt; 0.45km/h；
 
-三、设计流程
-四、关键技术1.判断运动状态和静止状态：
-平均速度大于等于0.45km/h的认为是运动状态，平均速度小于0.45km/h的认为是静止状态；
 
-2.判断行程的起始点和结束点：
-（1）在时间点A时，终端为静止状态，下一个时间点B终端为运动状态，...
+
+hadoop1
+192.168.159.129
+NameNode、DataNode、NodeManager、ResourceManager、Zookeeper、HMaster
+
+
+hadoop2
+192.168.159.130
+SecondaryNameNode、DataNode、NodeManager、Zookeeper、HRegionServer
+
+
+hadoop3
+192.168.159.131
+DataNode、NodeManager、Zookeeper、HRegionServer
+
+
+
+二 配置HBase信息...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/05</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/20</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="行程提取  GoogleEarth">行程提取  GoogleEarth</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Hadoop HBase">Hadoop HBase</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/03/20/Hadoop集群搭建之Zookeeper安装/">
+            
+                <span>Hadoop集群搭建之Zookeeper安装</span>
+        </a>
+        <div class="abstract-content">
+            一 集群规划
+
+
+主机名
+IP
+集群规划
+
+
+
+
+hadoop1
+192.168.159.129
+NameNode、DataNode、NodeManager、ResourceManager、Zookeeper
+
+
+hadoop2
+192.168.159.130
+SecondaryNameNode、DataNode、NodeManager、Zookeeper
+
+
+hadoop3
+192.168.159.131
+DataNode、NodeManager、Zookeeper
+
+
+
+二 配置Zookeeper信息将zookeeper压缩包放在/home/mch目录下，并进行解压。
+# tar -...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/20</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Hadoop Zookeeper">Hadoop Zookeeper</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/03/20/Hadoop伪分布式集群搭建/">
+            
+                <span>Hadoop伪分布式集群搭建</span>
+        </a>
+        <div class="abstract-content">
+            一 配置环境及规划
+
+
+主机名
+IP
+集群规划
+
+
+
+
+hadoop1
+192.168.159.129
+NameNode、DataNode、NodeManager、ResourceManager
+
+
+hadoop2
+192.168.159.130
+SecondaryNameNode、DataNode、NodeManager
+
+
+hadoop3
+192.168.159.131
+DataNode、NodeManager
+
+
+
+二 环境搭建及配置1 Linux环境搭建下载VMWare Workstation，搭建Linux环境（典型），安装CentOS7系统，并命名为hadoop1。
+
+注意：...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/20</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Hadoop NameNode DataNode">Hadoop NameNode DataNode</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/03/02/Ganglia监控程序安装/">
+            
+                <span>Ganglia监控程序安装</span>
+        </a>
+        <div class="abstract-content">
+            一 配置环境及规划
+
+
+主机名
+IP
+集群规划
+
+
+
+
+hadoop1
+192.168.159.129
+NameNode、Zookeeper、ResourceManager、HMaster、HRegionServer、gmetad、gmond、gweb
+
+
+hadoop2
+192.168.159.130
+NameNode、Zookeeper、ResourceManager、HMaster、HRegionServer、gmond
+
+
+hadoop3
+192.168.159.131
+DataNode、Zookeeper、NodeManager、HRegionServer、gmond
+
+
+
+二...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/02</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="ganglia 监控 hadoop hbase">ganglia 监控 hadoop hbase</a>
     
 </div>
             
@@ -391,36 +571,6 @@
     
     <article class="index-post">
         <a class="abstract-title" href="/2018/12/03/article/">
-            
-                <span>test</span>
-        </a>
-        <div class="abstract-content">
-            优秀的人，不是不合群，而是他们合群的人里面没有你
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="test 测试">test 测试</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/12/03/article - 副本/">
             
                 <span>test</span>
         </a>
@@ -600,9 +750,23 @@ More...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 4
+        Total : 6
         </div>
         <!-- search  -->
         
@@ -618,7 +782,22 @@ More...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/05</span><a class="archive-post-title" href="/2019/01/05/1/">行程提取模型设计</a>
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href="/2019/03/20/Hadoop集群搭建之HBase安装/">Hadoop集群搭建之HBase安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href="/2019/03/20/Hadoop集群搭建之Zookeeper安装/">Hadoop集群搭建之Zookeeper安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href="/2019/03/20/Hadoop伪分布式集群搭建/">Hadoop伪分布式集群搭建</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/02</span><a class="archive-post-title" href="/2019/03/02/Ganglia监控程序安装/">Ganglia监控程序安装</a>
         </li>
     
     
@@ -633,11 +812,6 @@ More...
     
         <li class="archive-post-item">
             <span class="archive-post-date">12/03</span><a class="archive-post-title" href="/2018/12/03/article/">test</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/03</span><a class="archive-post-title" href="/2018/12/03/article - 副本/">test</a>
         </li>
     
     
@@ -661,7 +835,17 @@ More...
     
         <span class="sidebar-tag-name" data-tags="test 测试"><span class="iconfont-archer">&#xe606;</span>test 测试</span>
     
-        <span class="sidebar-tag-name" data-tags="行程提取  GoogleEarth"><span class="iconfont-archer">&#xe606;</span>行程提取  GoogleEarth</span>
+        <span class="sidebar-tag-name" data-tags="ganglia 监控 hadoop hbase"><span class="iconfont-archer">&#xe606;</span>ganglia 监控 hadoop hbase</span>
+    
+        <span class="sidebar-tag-name" data-tags="hadoop hbase"><span class="iconfont-archer">&#xe606;</span>hadoop hbase</span>
+    
+        <span class="sidebar-tag-name" data-tags="hadoop"><span class="iconfont-archer">&#xe606;</span>hadoop</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hadoop HBase"><span class="iconfont-archer">&#xe606;</span>Hadoop HBase</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hadoop Zookeeper"><span class="iconfont-archer">&#xe606;</span>Hadoop Zookeeper</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hadoop NameNode DataNode"><span class="iconfont-archer">&#xe606;</span>Hadoop NameNode DataNode</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

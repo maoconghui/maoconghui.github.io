@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="MaoConghui">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="MaoConghui">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Better late than never">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Hadoop伪分布式集群搭建 · MaoConghui</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/20181201112207.jpg">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin="">
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin="">
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">MaoConghui</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Hadoop伪分布式集群搭建</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">MaoConghui</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/20190105154222.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Hadoop伪分布式集群搭建
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Hadoop NameNode DataNode">Hadoop NameNode DataNode</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">3.4k</span>阅读时长: <span class="post-count reading-time">15 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/03/20</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="一-配置环境及规划"><a href="#一-配置环境及规划" class="headerlink" title="一 配置环境及规划"></a>一 配置环境及规划</h2><table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>IP</th>
+<th>集群规划</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hadoop1</td>
+<td>192.168.159.129</td>
+<td>NameNode、DataNode、NodeManager、ResourceManager</td>
+</tr>
+<tr>
+<td>hadoop2</td>
+<td>192.168.159.130</td>
+<td>SecondaryNameNode、DataNode、NodeManager</td>
+</tr>
+<tr>
+<td>hadoop3</td>
+<td>192.168.159.131</td>
+<td>DataNode、NodeManager</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二-环境搭建及配置"><a href="#二-环境搭建及配置" class="headerlink" title="二 环境搭建及配置"></a>二 环境搭建及配置</h2><h4 id="1-Linux环境搭建"><a href="#1-Linux环境搭建" class="headerlink" title="1 Linux环境搭建"></a>1 Linux环境搭建</h4><p>下载VMWare Workstation，搭建Linux环境（典型），安装CentOS7系统，并命名为hadoop1。</p>
+<blockquote>
+<p>注意：安装镜像文件时若显示无法检测到操作系统，则选择稍后安装，下一步之后点击自定义硬件，在新CD/DVD中添加镜像文件。</p>
+</blockquote>
+<p>然后克隆两个虚拟机，在虚拟机-管理-克隆-创建完整克隆，并重命名hadoop2，hadoop3。</p>
+<blockquote>
+<p>注意：克隆的节点与主节点的ip地址是一样的，所以为了避免地址冲突，需要对克隆后的节点进行网络配置。</p>
+</blockquote>
+<h4 id="2-网络配置"><a href="#2-网络配置" class="headerlink" title="2 网络配置"></a>2 网络配置</h4><p>对三个节点进行网络配置，进入/etc/sysconfig/network-scripts目录,修改第一个形如ifcfg-ens的文件。</p>
+<pre><code># cd /etc/sysconfig/network-scripts
+
+# vim ifcfg-ens33
+</code></pre><p>修改并添加信息如下：</p>
+<pre><code>ONBOOT=yes
+
+BOOTPROTO=static
+
+IPADDR=192.168.159.129 #根据网关自行调整【ip add】
+
+PREFIX=255.255.255.0  #注意需要使用PREFIX
+
+GATEWAY=192.168.159.2
+
+DNS1=114.114.114.114
+
+DNS2=202.96.134.133
+</code></pre><p>然后重启网络：</p>
+<pre><code># systemctl restart network.service
+</code></pre><p>测试网络：</p>
+<pre><code># ping www.baidu.com
+</code></pre><p>在hadoop2和hadoop3的ifcfg-ens文件中配置其ip。</p>
+<pre><code># vi ifcfg-ens33
+</code></pre><p>设置集群的主机名</p>
+<pre><code># hostnamectl set-hostname hadoop2
+</code></pre><p>设置如下：</p>
+<pre><code>192.168.159.129 hadoop1
+
+192.168.159.130 hadoop2
+
+192.168.159.131 hadoop3
+</code></pre><h4 id="3-关闭防火墙"><a href="#3-关闭防火墙" class="headerlink" title="3 关闭防火墙"></a>3 关闭防火墙</h4><p>端口绑定了防火墙，所以需要关闭（三个节点都关闭）。</p>
+<pre><code># systemctl stop firewalld.service  #关闭防火墙
+
+# systemctl disable firewalld.service  #禁止开机启动
+
+# vim /etc/selinux/config  #设置selinux = disabled
+</code></pre><h4 id="4-配置SSH免密登录"><a href="#4-配置SSH免密登录" class="headerlink" title="4 配置SSH免密登录"></a>4 配置SSH免密登录</h4><p>当搭建linux集群环境的时候，从一个节点登录到另一个节点，通过ssh方式，每次登录跳转都需要输入密码，这样造成非常不便，其实可以通过配置SSH互信，来实现集群节点间的免密码登录跳转。</p>
+<p><strong>公钥认证的基本思想：</strong> 对信息的加密和解密采用不同的key，这对key分别称作private key和public key，其中，public key存放在欲登录的服务器上，而private key为特定的客户机所持有。当客户机向服务器发出建立安全连接的请求时，首先发送自己的public key，如果这个public key是被服务器所允许的，服务器就发送一个经过public key加密的随机数据给客户机，这个数据只能通过private key解密，客户机将解密后的信息发还给服务器，服务器验证正确后即确认客户机是可信任的，从而建立起一条安全的信息通道。通过这种方式，客户机不需要向外发送自己的身份标志“private key”即可达到校验的目的，并且private key是不能通过public key反向推断出来的。这避免了网络窃听可能造成的密码泄露。客户机需要小心的保存自己的private key，以免被其他人窃取，一旦这样的事情发生，就需要各服务器更换受信的public key列表。 </p>
+<p>简言之，当我们在搭建集群过程中，在集群中机器间相互通信的时候，会不断的提示你输入通信机器的密码，然而当我们建立起集群间的ssh互信后，任意两台机器之间可以无密码的方便通信。</p>
+<h5 id="4-1-创建公钥秘钥"><a href="#4-1-创建公钥秘钥" class="headerlink" title="4.1 创建公钥秘钥"></a>4.1 创建公钥秘钥</h5><pre><code># mkdir ~/.ssh  #创建.ssh目录（如果目录存在，就不必要创建）
+
+# chmod  700 ~/.ssh  #更改.ssh权限
+
+# cd ~/.ssh  #进入.ssh目录
+
+# ssh-keygen -t rsa  
+</code></pre><p>以上操作三个节点都要设置</p>
+<h5 id="4-2-修改hosts文件"><a href="#4-2-修改hosts文件" class="headerlink" title="4.2 修改hosts文件"></a>4.2 修改hosts文件</h5><pre><code># vi /etc/hosts
+</code></pre><p>添加如下信息：</p>
+<pre><code>192.168.159.129 hadoop1
+
+192.168.159.130 hadoop2
+
+192.168.159.131 hadoop3
+</code></pre><p>以上操作只在主节点上设置</p>
+<h5 id="4-3-整合公钥文件"><a href="#4-3-整合公钥文件" class="headerlink" title="4.3 整合公钥文件"></a>4.3 整合公钥文件</h5><p>将hadoop1中的id_rsa.pub拷贝到其他服务器中</p>
+<pre><code># cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys  
+
+# ssh hadoop2 cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+
+# ssh hadoop3 cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+
+# chmod 600 ~/.ssh/authorized_keys
+</code></pre><h5 id="4-4-分发整合后的公钥文件"><a href="#4-4-分发整合后的公钥文件" class="headerlink" title="4.4 分发整合后的公钥文件"></a>4.4 分发整合后的公钥文件</h5><p>将整合后的公钥文件从hadoop1分别复制到hadoop2和hadoop3上</p>
+<pre><code># scp ~/.ssh/authorized_keys hadoop2:~/.ssh/
+
+# scp ~/.ssh/authorized_keys hadoop3:~/.ssh/
+</code></pre><h4 id="5-分发hosts文件"><a href="#5-分发hosts文件" class="headerlink" title="5 分发hosts文件"></a>5 分发hosts文件</h4><p>我们需要将我们在hadoop1节点上配置的hosts文件分发到所有的节点上，在hadoop1节点上输入如下命令：</p>
+<pre><code># scp /etc/hosts hadoop2:/etc
+
+# scp /etc/hosts hadoop3:/etc
+</code></pre><h4 id="6-测试SSH互信（三个节点都设置）"><a href="#6-测试SSH互信（三个节点都设置）" class="headerlink" title="6 测试SSH互信（三个节点都设置）"></a>6 测试SSH互信（三个节点都设置）</h4><p>在各个节点上运行以下命令，若不需要输入密码就显示系统当前日期，就说明SSH互信已经配置成功了，在hadoop1节点上输入以下命令：</p>
+<pre><code># ssh hadoop2 date
+
+# ssh hadoop3 date
+</code></pre><p>然后分别在hadoop2和hadoop3节点分别输入以下命令：</p>
+<pre><code># ssh hadoop1 date
+
+# ssh hadoop3 date
+
+# ssh hadoop1 date
+
+# ssh hadoop2 date
+</code></pre><h4 id="7-设置时间同步"><a href="#7-设置时间同步" class="headerlink" title="7 设置时间同步"></a>7 设置时间同步</h4><p>利用NTP将三个节点的时间设置为同步（一个服务端，两个客户端）</p>
+<p>如果一个集群中，时间相差很大，那么会出现很多诡异的问题。所以，设置服务器之间时间同步是必不可少的！</p>
+<h5 id="7-1-准备工作"><a href="#7-1-准备工作" class="headerlink" title="7.1 准备工作"></a>7.1 准备工作</h5><p>首先安装ntp</p>
+<pre><code># yum install ntp
+</code></pre><p>安装完毕之后，启动服务</p>
+<pre><code># systemctl start ntpd.service
+</code></pre><p>设置开机自启动</p>
+<pre><code># systemctl enable ntpd.service
+</code></pre><p>以上操作三个节点都要设置</p>
+<h5 id="7-2-NTP服务端设置"><a href="#7-2-NTP服务端设置" class="headerlink" title="7.2 NTP服务端设置"></a>7.2 NTP服务端设置</h5><p>第一台服务器192.168.159.129，即hadoop1，作为ntpserver，将他设置为同步外网时间（ntpd服务开启默认就同步了），但是得设置允许内网网段可以连接它，将它作为内网的时间同步服务器。</p>
+<p>修改/etc/ntp.conf文件</p>
+<pre><code># vim /etc/ntp.conf
+</code></pre><p>添加如下信息，表示允许159网段来同步此服务器</p>
+<pre><code>restrict 192.168.159.0 mask 255.255.255.0
+</code></pre><p>设置后，重启ntpd服务，用ntpstat来检查效果</p>
+<pre><code># systemctl restart ntpd
+
+# ntpstat
+</code></pre><h5 id="7-3-NTP客户端设置（在hadoop2和hadoop3两个节点上设置）"><a href="#7-3-NTP客户端设置（在hadoop2和hadoop3两个节点上设置）" class="headerlink" title="7.3 NTP客户端设置（在hadoop2和hadoop3两个节点上设置）"></a>7.3 NTP客户端设置（在hadoop2和hadoop3两个节点上设置）</h5><p>第二、三台服务器192.168.159.130，192.168.159.131，即hadoop2和hadoop3，作为ntpclient，将他设置为同步上面的ntpserver，分别在两个节点上做如下配置。 </p>
+<p>修改/etc/ntp.conf文件</p>
+<pre><code># vim /etc/ntp.conf
+</code></pre><p>注释掉外网时间服务器，添加本地服务器即可</p>
+<pre><code>server 192.168.159.130  #添加此行（131服务器上则添加server 192.168.159.131）
+
+# server 0.centos.pool.ntp.org iburst  #以下四行注释掉
+
+# server 1.centos.pool.ntp.org iburst
+
+# server 2.centos.pool.ntp.org iburst
+
+# server 3.centos.pool.ntp.org iburst
+</code></pre><p>设置后，重启ntpd服务，用ntpstat来检查效果</p>
+<pre><code># systemctl restart ntpd
+
+# ntpstat 
+</code></pre><h4 id="8-安装jdk"><a href="#8-安装jdk" class="headerlink" title="8 安装jdk"></a>8 安装jdk</h4><p>下载想安装的jdk版本之后，将压缩包放到/home/mch目录，解压缩后，更名为jdk1.8</p>
+<pre><code># cd /home/mch  #进入到压缩包所在目录下
+
+# tar -xzvf jdk-8u152-linux-x64.tar.gz  #解压Linux版本的jdk解压包
+
+# mv jdk1.8.0_111 jdk1.8  #重命名文件夹
+</code></pre><p>配置环境变量，修改/etc/profile文件</p>
+<pre><code># vim /etc/profile
+</code></pre><p>在最下方添加三行配置</p>
+<pre><code>export JAVA_HOME=/home/mch/jdk1.8
+
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+export PATH=$PATH:$JAVA_HOME/bin
+</code></pre><p>使修改内容生效</p>
+<pre><code># source /etc/profile
+</code></pre><p>以上操作三个节点都要设置</p>
+<h4 id="9-安装mysql"><a href="#9-安装mysql" class="headerlink" title="9 安装mysql"></a>9 安装mysql</h4><p>官网下载安装mysql-server</p>
+<pre><code># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+
+# rpm -ivh mysql-community-release-el7-5.noarch.rpm
+
+# yum install mysql-community-server
+</code></pre><p>安装成功后重启mysql服务</p>
+<pre><code># systemctl restart mysqld.service
+
+# systemctl enable mysqld.service  #设置mysql允许开机自启动
+</code></pre><blockquote>
+<p>mysql只需要在主节点安装。</p>
+</blockquote>
+<h2 id="三-安装配置Hadoop2-7-2集群"><a href="#三-安装配置Hadoop2-7-2集群" class="headerlink" title="三 安装配置Hadoop2.7.2集群"></a>三 安装配置Hadoop2.7.2集群</h2><h4 id="1-安装hadoop"><a href="#1-安装hadoop" class="headerlink" title="1 安装hadoop"></a>1 安装hadoop</h4><p>将下载的hadoop2.6.0压缩包，上传到主节点的目录下</p>
+<pre><code># cd /home/mch
+</code></pre><p>进行解压缩</p>
+<pre><code># tar -xzvf hadoop-2.6.0-x64.tar.gz
+</code></pre><p>修改目录为hadoop2.6.0</p>
+<pre><code># mv hadoop-2.6.0 hadoop2.6.0    
+</code></pre><p>修改配置文件，加入hadoop的环境变量</p>
+<pre><code># vim /etc/profile    
+</code></pre><p>增加内容如下</p>
+<pre><code>export JAVA_HOME=/home/mch/jdk1.8
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin
+export HADOOP_HOME=/home/mch/hadoop2.6.0
+export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
+</code></pre><p>新建所需目录</p>
+<pre><code># mkdir  /home/mch/hadoop2.6.0/tmp 
+
+# mkdir  /home/mch/hadoop2.6.0/var  
+
+#mkdir  /home/mch/hadoop2.6.0/dfs  
+
+# mkdir  /home/mch/hadoop2.6.0/dfs/name  
+
+# mkdir  /home/mch/hadoop2.6.0/dfs/data  
+</code></pre><h4 id="2-修改hadoop-env-sh文件"><a href="#2-修改hadoop-env-sh文件" class="headerlink" title="2 修改hadoop-env.sh文件"></a>2 修改hadoop-env.sh文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/
+
+# vim hadoop-env.sh
+</code></pre><p>将:export JAVA_HOME=${JAVA_HOME} </p>
+<p>修改为：export JAVA_HOME=/home/mch/jdk1.8 #修改为jdk目录</p>
+<h4 id="3-修改slaves文件"><a href="#3-修改slaves文件" class="headerlink" title="3 修改slaves文件"></a>3 修改slaves文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/
+
+# vim slaves
+</code></pre><p>增加如下内容</p>
+<pre><code>hadoop2
+
+hadoop3
+</code></pre><p>此时hadoop1作为主节点，以及主备节点，管理节点，而同时hadoop1，hadoop2，hadoop3都作为数据节点。</p>
+<h4 id="4-修改core-site-xml文件"><a href="#4-修改core-site-xml文件" class="headerlink" title="4 修改core-site.xml文件"></a>4 修改core-site.xml文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/ 
+
+# vim core-site.xml
+</code></pre><p>修改内容如下</p>
+<pre><code>&lt;configuration&gt;
+
+    &lt;!-- 指定hadoop的临时目录 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;/home/mch/hadoop2.6.0/tmp&lt;/value&gt;
+        &lt;description&gt;Abase for other temporary directories.&lt;/description&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定集群中NameNode结点的URI(包括协议、主机名称、端口号) --&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.default.name&lt;/name&gt;
+        &lt;value&gt;hdfs://hadoop1:9000&lt;/value&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre><h4 id="5-修改hdfs-site-xml文件"><a href="#5-修改hdfs-site-xml文件" class="headerlink" title="5 修改hdfs-site.xml文件"></a>5 修改hdfs-site.xml文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/ 
+
+# vim hdfs-site.xml
+</code></pre><p>修改内容如下</p>
+<pre><code>&lt;configuration&gt;
+
+    &lt;!-- 设置NameNode的http通讯地址 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;
+        &lt;value&gt;hadoop1:50070&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定SecondaryNameNode的http通讯地址 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;
+        &lt;value&gt;hadoop2:50090&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定NameNode结点存储hadoop文件系统信息的本地系统路径 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+        &lt;value&gt;/home/mch/hadoop2.6.0/dfs/name&lt;/value&gt;
+        &lt;description&gt;Path on the local filesystem where theNameNode stores the namespace and transactions logs persistently.&lt;/description&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定DataNode结点被指定要存储数据的本地文件系统路径 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+        &lt;value&gt;/home/mch/hadoop2.6.0/dfs/data&lt;/value&gt;
+        &lt;description&gt;Comma separated list of paths on the localfilesystem of a DataNode where it should store its blocks.&lt;/description&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定系统文件块的数据备份个数 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;3&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 关闭hadoop目录的权限 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.permissions&lt;/name&gt;
+        &lt;value&gt;false&lt;/value&gt;
+        &lt;description&gt;need not permissions&lt;/description&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre><h4 id="6-修改mapred-site-xml文件"><a href="#6-修改mapred-site-xml文件" class="headerlink" title="6 修改mapred-site.xml文件"></a>6 修改mapred-site.xml文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/ 
+# cp mapred-site.xml.template mapred-site.xml  
+# vim hdfs-site.xml
+</code></pre><p>修改内容如下</p>
+<pre><code>&lt;configuration&gt;
+
+    &lt;!-- 指定JobTracker的主机和端口 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapreduce.job.tracker&lt;/name&gt;
+        &lt;value&gt;hadoop1:49001&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定MapReduce框架为Yarn方式 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+        &lt;value&gt;yarn&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><h4 id="7-修改yarn-site-xml文件"><a href="#7-修改yarn-site-xml文件" class="headerlink" title="7 修改yarn-site.xml文件"></a>7 修改yarn-site.xml文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/ 
+# vim yarn-site.xml
+</code></pre><p>修改内容如下</p>
+<pre><code>&lt;configuration&gt;
+
+    &lt;!-- 指定ResourceManager所在节点的主机名 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
+        &lt;value&gt;hadoop1&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定ResourceManager提供给客户端访问的地址 --&gt;
+    &lt;property&gt;
+        &lt;description&gt;The address of the applications manager interface in the RM.&lt;/description&gt;
+        &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;
+        &lt;value&gt;${yarn.resourcemanager.hostname}:8032&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定NodeManager执行的服务 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定向ResourceManager申请的最大内存量 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.scheduler.maximum-allocation-mb&lt;/name&gt;
+        &lt;value&gt;12288&lt;/value&gt;
+        &lt;discription&gt;每个节点可用内存,单位MB,默认8182MB&lt;/discription&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre><p>在主节点上配置好hadoop包后，同步到另外两个节点，配置不用修改，三个节点的配置都一样！</p>
+<blockquote>
+<p>注意：<br>在实际应用中，应将NameNode和SecondaryNameNode配置在不同的节点上，否则当NameNode宕机时，SecondaryNameNode也会故障。</p>
+</blockquote>
+<h2 id="四-hadoop集群的初始化和启动"><a href="#四-hadoop集群的初始化和启动" class="headerlink" title="四 hadoop集群的初始化和启动"></a>四 hadoop集群的初始化和启动</h2><h4 id="1-初始化hadoop集群"><a href="#1-初始化hadoop集群" class="headerlink" title="1 初始化hadoop集群"></a>1 初始化hadoop集群</h4><pre><code># cd /home/mch/hadoop2.7.2/bin 
+
+# ./hadoop namenode -format 
+</code></pre><p>格式化成功后，可以在看到在/home/mch/hadoop2.7.2/dfs/name/目录多了一个current目录，而且该目录内有4个文件。</p>
+<h4 id="2-启动dfs"><a href="#2-启动dfs" class="headerlink" title="2 启动dfs"></a>2 启动dfs</h4><pre><code># cd /home/mch/hadoop2.7.2/sbin 
+
+# ./start-dfs.sh 
+</code></pre><p>在三个节点上分别输入一下命令，查看三个节点上开启的进程</p>
+<pre><code># jps
+</code></pre><p>可以看到在hadoop1中有NameNode、DataNode，在hadoop2中有SecondaryNameNode、DataNode，在hadoop3中有DataNode。</p>
+<h4 id="3-启动yarn"><a href="#3-启动yarn" class="headerlink" title="3 启动yarn"></a>3 启动yarn</h4><pre><code># cd /home/mch/hadoop2.7.2/sbin
+
+# ./start-yarn.sh 
+</code></pre><p>在三个节点上分别输入一下命令，查看三个节点上开启的进程</p>
+<pre><code># jps
+</code></pre><p>可以看到此时hadoop1中多了ResourceManager和NodeManager，hadoop2和hadoop3中分别多了NodeManager。</p>
+<h2 id="五-集群验证"><a href="#五-集群验证" class="headerlink" title="五 集群验证"></a>五 集群验证</h2><p>可通过命令jps来查看集群的进程</p>
+<p>也可通过网页来查看</p>
+<p><a href="http://192.168.159.129:50070" target="_blank" rel="noopener">http://192.168.159.129:50070</a>          </p>
+<p><a href="http://192.168.159.129:8088" target="_blank" rel="noopener">http://192.168.159.129:8088</a></p>
+<h2 id="六-遇到的问题（不定时更新）"><a href="#六-遇到的问题（不定时更新）" class="headerlink" title="六 遇到的问题（不定时更新）"></a>六 遇到的问题（不定时更新）</h2><p><strong>—–DataNode启动失败—–</strong></p>
+<p>有两个原因：</p>
+<p>1、DataNode和NameNode的ClusterID不一致。是由于多次初始化namenode（即./hdfs namenode -format）造成的，每一次format，NameNode都会生成新的ClusterID，而DataNode还是保持原来的ClusterID。</p>
+<p>2、将hadoop1中的配置文件拷贝到其他节点中，文件权限未开启。</p>
+<p>原因1解决办法：</p>
+<p>1.复制hadoop2.7.2/dfs/name/current/VERSION文件中namenode的clusterID.</p>
+<p>2.用该clusterID把所有datanode节点机器中hadoop2.7.2/dfs/data/current/VERSION中的clusterID替换掉</p>
+<p>原因2解决办法：</p>
+<pre><code># chmod 777 -R /home/mch/hadoop2.6.0
+</code></pre>
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">MaoConghui</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/03/20/Hadoop伪分布式集群搭建/">http://yoursite.com/2019/03/20/Hadoop伪分布式集群搭建/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/03/20/Hadoop伪分布式集群搭建/">March 20th 2019, 2:06:00 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/03/20/Hadoop伪分布式集群搭建/">March 20th 2019, 7:59:59 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2019/03/20/Hadoop集群搭建之Zookeeper安装/" title="Hadoop集群搭建之Zookeeper安装">
+                    <div class="nextTitle">Hadoop集群搭建之Zookeeper安装</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/03/02/Ganglia监控程序安装/" title="Ganglia监控程序安装">
+                    <div class="prevTitle">Ganglia监控程序安装</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:815136388@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/maoconghui" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title="wechat">
+                  
+                  <img class="profile-qr" src="/avatar/20181201114225.jpg">
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-配置环境及规划"><span class="toc-number">1.</span> <span class="toc-text">一 配置环境及规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-环境搭建及配置"><span class="toc-number">2.</span> <span class="toc-text">二 环境搭建及配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Linux环境搭建"><span class="toc-number">2.0.1.</span> <span class="toc-text">1 Linux环境搭建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-网络配置"><span class="toc-number">2.0.2.</span> <span class="toc-text">2 网络配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-关闭防火墙"><span class="toc-number">2.0.3.</span> <span class="toc-text">3 关闭防火墙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-配置SSH免密登录"><span class="toc-number">2.0.4.</span> <span class="toc-text">4 配置SSH免密登录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1-创建公钥秘钥"><span class="toc-number">2.0.4.1.</span> <span class="toc-text">4.1 创建公钥秘钥</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-2-修改hosts文件"><span class="toc-number">2.0.4.2.</span> <span class="toc-text">4.2 修改hosts文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-整合公钥文件"><span class="toc-number">2.0.4.3.</span> <span class="toc-text">4.3 整合公钥文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-分发整合后的公钥文件"><span class="toc-number">2.0.4.4.</span> <span class="toc-text">4.4 分发整合后的公钥文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-分发hosts文件"><span class="toc-number">2.0.5.</span> <span class="toc-text">5 分发hosts文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-测试SSH互信（三个节点都设置）"><span class="toc-number">2.0.6.</span> <span class="toc-text">6 测试SSH互信（三个节点都设置）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-设置时间同步"><span class="toc-number">2.0.7.</span> <span class="toc-text">7 设置时间同步</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#7-1-准备工作"><span class="toc-number">2.0.7.1.</span> <span class="toc-text">7.1 准备工作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-2-NTP服务端设置"><span class="toc-number">2.0.7.2.</span> <span class="toc-text">7.2 NTP服务端设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-3-NTP客户端设置（在hadoop2和hadoop3两个节点上设置）"><span class="toc-number">2.0.7.3.</span> <span class="toc-text">7.3 NTP客户端设置（在hadoop2和hadoop3两个节点上设置）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-安装jdk"><span class="toc-number">2.0.8.</span> <span class="toc-text">8 安装jdk</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-安装mysql"><span class="toc-number">2.0.9.</span> <span class="toc-text">9 安装mysql</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-安装配置Hadoop2-7-2集群"><span class="toc-number">3.</span> <span class="toc-text">三 安装配置Hadoop2.7.2集群</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装hadoop"><span class="toc-number">3.0.1.</span> <span class="toc-text">1 安装hadoop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-修改hadoop-env-sh文件"><span class="toc-number">3.0.2.</span> <span class="toc-text">2 修改hadoop-env.sh文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-修改slaves文件"><span class="toc-number">3.0.3.</span> <span class="toc-text">3 修改slaves文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-修改core-site-xml文件"><span class="toc-number">3.0.4.</span> <span class="toc-text">4 修改core-site.xml文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-修改hdfs-site-xml文件"><span class="toc-number">3.0.5.</span> <span class="toc-text">5 修改hdfs-site.xml文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-修改mapred-site-xml文件"><span class="toc-number">3.0.6.</span> <span class="toc-text">6 修改mapred-site.xml文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-修改yarn-site-xml文件"><span class="toc-number">3.0.7.</span> <span class="toc-text">7 修改yarn-site.xml文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-hadoop集群的初始化和启动"><span class="toc-number">4.</span> <span class="toc-text">四 hadoop集群的初始化和启动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-初始化hadoop集群"><span class="toc-number">4.0.1.</span> <span class="toc-text">1 初始化hadoop集群</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-启动dfs"><span class="toc-number">4.0.2.</span> <span class="toc-text">2 启动dfs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-启动yarn"><span class="toc-number">4.0.3.</span> <span class="toc-text">3 启动yarn</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-集群验证"><span class="toc-number">5.</span> <span class="toc-text">五 集群验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-遇到的问题（不定时更新）"><span class="toc-number">6.</span> <span class="toc-text">六 遇到的问题（不定时更新）</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 6
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href="/2019/03/20/Hadoop集群搭建之HBase安装/">Hadoop集群搭建之HBase安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href="/2019/03/20/Hadoop集群搭建之Zookeeper安装/">Hadoop集群搭建之Zookeeper安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href="/2019/03/20/Hadoop伪分布式集群搭建/">Hadoop伪分布式集群搭建</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/02</span><a class="archive-post-title" href="/2019/03/02/Ganglia监控程序安装/">Ganglia监控程序安装</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href="/2018/12/03/article/">test</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2018/11/30/hello-world/">Hello World</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="test 测试"><span class="iconfont-archer">&#xe606;</span>test 测试</span>
+    
+        <span class="sidebar-tag-name" data-tags="ganglia 监控 hadoop hbase"><span class="iconfont-archer">&#xe606;</span>ganglia 监控 hadoop hbase</span>
+    
+        <span class="sidebar-tag-name" data-tags="hadoop hbase"><span class="iconfont-archer">&#xe606;</span>hadoop hbase</span>
+    
+        <span class="sidebar-tag-name" data-tags="hadoop"><span class="iconfont-archer">&#xe606;</span>hadoop</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hadoop HBase"><span class="iconfont-archer">&#xe606;</span>Hadoop HBase</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hadoop Zookeeper"><span class="iconfont-archer">&#xe606;</span>Hadoop Zookeeper</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hadoop NameNode DataNode"><span class="iconfont-archer">&#xe606;</span>Hadoop NameNode DataNode</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "MaoConghui"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
