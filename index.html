@@ -1,1024 +1,2299 @@
 <!DOCTYPE html>
-<html lang="">
-    <!-- title -->
 
 
 
-
-<!-- keywords -->
-
+  
 
 
-
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="author" content="MaoConghui">
-    <meta name="renderer" content="webkit">
-    <meta name="copyright" content="MaoConghui">
-    
-    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
-    
-    <meta name="description" content="Better late than never">
-    <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MaoConghui</title>
-    <style type="text/css">
-    @font-face {
-        font-family: 'Oswald-Regular';
-        src: url("/font/Oswald-Regular.ttf");
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Better late than never">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MaoConghui">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="MaoConghui">
+<meta property="og:description" content="Better late than never">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MaoConghui">
+<meta name="twitter:description" content="Better late than never">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
-
-    body {
-        margin: 0;
-    }
-
-    header,
-    footer,
-    .back-top,
-    .sidebar,
-    .container,
-    .site-intro-meta,
-    .toc-wrapper {
-        display: none;
-    }
-
-    .site-intro {
-        position: relative;
-        z-index: 3;
-        width: 100%;
-        /* height: 50vh; */
-        overflow: hidden;
-    }
-
-    .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2.5s ease-out 0s infinite;
-    }
-
-    @keyframes gradient-move {
-        0% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-</style>
-
-    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
-    
-    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
-/* This file is meant as a standalone workflow for
-- testing support for link[rel=preload]
-- enabling async CSS loading in browsers that do not support rel=preload
-- applying rel preload css once loaded, whether supported or not.
-*/ -->
-<script>
-(function( w ){
-	"use strict";
-	// rel=preload support test
-	if( !w.loadCSS ){
-		w.loadCSS = function(){};
-	}
-	// define on the loadCSS obj
-	var rp = loadCSS.relpreload = {};
-	// rel=preload feature support test
-	// runs once and returns a function for compat purposes
-	rp.support = (function(){
-		var ret;
-		try {
-			ret = w.document.createElement( "link" ).relList.supports( "preload" );
-		} catch (e) {
-			ret = false;
-		}
-		return function(){
-			return ret;
-		};
-	})();
-
-	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
-	// then change that media back to its intended value on load
-	rp.bindMediaToggle = function( link ){
-		// remember existing media attr for ultimate state, or default to 'all'
-		var finalMedia = link.media || "all";
-
-		function enableStylesheet(){
-			link.media = finalMedia;
-		}
-
-		// bind load handlers to enable media
-		if( link.addEventListener ){
-			link.addEventListener( "load", enableStylesheet );
-		} else if( link.attachEvent ){
-			link.attachEvent( "onload", enableStylesheet );
-		}
-
-		// Set rel and non-applicable media type to start an async request
-		// note: timeout allows this to happen async to let rendering continue in IE
-		setTimeout(function(){
-			link.rel = "stylesheet";
-			link.media = "only x";
-		});
-		// also enable media after 3 seconds,
-		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
-		setTimeout( enableStylesheet, 3000 );
-	};
-
-	// loop through link elements in DOM
-	rp.poly = function(){
-		// double check this to prevent external calls from running
-		if( rp.support() ){
-			return;
-		}
-		var links = w.document.getElementsByTagName( "link" );
-		for( var i = 0; i < links.length; i++ ){
-			var link = links[ i ];
-			// qualify links to those with rel=preload and as=style attrs
-			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
-				// prevent rerunning on link
-				link.setAttribute( "data-loadcss", true );
-				// bind listeners to toggle media back
-				rp.bindMediaToggle( link );
-			}
-		}
-	};
-
-	// if unsupported, run the polyfill
-	if( !rp.support() ){
-		// run once at least
-		rp.poly();
-
-		// rerun poly on an interval until onload
-		var run = w.setInterval( rp.poly, 500 );
-		if( w.addEventListener ){
-			w.addEventListener( "load", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		} else if( w.attachEvent ){
-			w.attachEvent( "onload", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		}
-	}
-
-
-	// commonjs
-	if( typeof exports !== "undefined" ){
-		exports.loadCSS = loadCSS;
-	}
-	else {
-		w.loadCSS = loadCSS;
-	}
-}( typeof global !== "undefined" ? global : this ) );
+  };
 </script>
 
-    <link rel="icon" href="/assets/20181201112207.jpg">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
-    <link rel="preload" href="/scripts/main.js" as="script">
-    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin="">
-    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin="">
-    
-    <!-- fancybox -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
-    <!-- 百度统计  -->
-    
-    <!-- 谷歌统计  -->
-    
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/">
+
+
+
+
+
+  <title>MaoConghui</title>
+  
+
+
+
+
+
+
+
+
 </head>
 
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
     
-        <body class="home-body">
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+	<a href="https://github.com/maoconghui" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
     
-    
-<header class="header index-header">
 
-    <div class="read-progress"></div>
-    <div class="header-sidebar-menu">&#xe775;</div>
-    <!-- post页的toggle banner  -->
-    
-    <a class="home-link" href="/">MaoConghui</a>
-</header>
-    <div class="wrapper">
-        <div class="site-intro" style="
-
-
-
-
-
-
-
-height:50vh;
-">
-    
-    <!-- 主页  -->
-    
-    
-    <!-- 文章页  -->
-            
-    <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/20190105154245.jpg)"></div>
-    <div class="site-intro-meta">
-        <!-- 标题  -->
-        <h1 class="intro-title">
-            <!-- 主页  -->
-            
-            MaoConghui
-            <!-- 文章页  -->
-            
-        </h1>
-        <!-- 副标题 -->
-        <p class="intro-subtitle">
-            <!-- 主页副标题  -->
-            
-            
-                Better late than never
-            
-            <!-- 文章页  -->
-            
-        </p>
-        <!-- 文章页meta -->
-        
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MaoConghui</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
-        <script>
- 
-  // get user agent
-  var browser = {
-    versions: function () {
-      var u = window.navigator.userAgent;
-      return {
-        userAgent: u,
-        trident: u.indexOf('Trident') > -1, //IE内核
-        presto: u.indexOf('Presto') > -1, //opera内核
-        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-        iPad: u.indexOf('iPad') > -1, //是否为iPad
-        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
-        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
-        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
-      };
-    }()
-  }
-  console.log("userAgent:" + browser.versions.userAgent);
 
-  // callback
-  function fontLoaded() {
-    console.log('font loaded');
-    if (document.getElementsByClassName('site-intro-meta')) {
-      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
-      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
-      var postIntros = document.getElementsByClassName('post-intros')[0]
-      if (postIntros) {
-        postIntros.classList.add('post-fade-in');
-      }
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/" "="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/Hadoop集群搭建之HBase安装 /">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MaoConghui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MaoConghui">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/22/Hadoop集群搭建之HBase安装 /" itemprop="url">Hadoop集群搭建之HBase安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-22T12:00:00+08:00">
+                2019-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一-集群规划"><a href="#一-集群规划" class="headerlink" title="一 集群规划"></a>一 集群规划</h2><table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>IP</th>
+<th>集群规划</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hadoop1</td>
+<td>192.168.159.129</td>
+<td>NameNode、DataNode、NodeManager、ResourceManager、Zookeeper、HMaster</td>
+</tr>
+<tr>
+<td>hadoop2</td>
+<td>192.168.159.130</td>
+<td>SecondaryNameNode、DataNode、NodeManager、Zookeeper、HRegionServer</td>
+</tr>
+<tr>
+<td>hadoop3</td>
+<td>192.168.159.131</td>
+<td>DataNode、NodeManager、Zookeeper、HRegionServer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二-配置HBase信息"><a href="#二-配置HBase信息" class="headerlink" title="二 配置HBase信息"></a>二 配置HBase信息</h2><p>将压缩包hbase-1.2.4.tar.gz放到/home/mch目录下，并解压</p>
+<pre><code># tar –zxvf  hbase-1.2.4.tar.gz
+</code></pre><p>配置hbase环境变量</p>
+<pre><code># vim /etc/profile
+</code></pre><p>添加内容如下：</p>
+<pre><code>export HBASE_HOME=/opt/hbase-1.2.4
+
+export PATH=$PATH:$HBASE_HOME/bin
+</code></pre><p>在/hbase-1.2.4/conf目录下，修改hbase-env.sh</p>
+<pre><code># vim hbase-env.sh
+</code></pre><p>修改内容如下：</p>
+<pre><code>export JAVA_HOME=/home/mch/java/jdk1.8
+
+export HBASE_LOG_DIR=/home/mch/hbase-1.2.4/logs
+
+export HBASE_MANAGES_ZK=false
+
+export HBASE_PID_DIR=/home/mch/hbase-1.2.4/pids
+</code></pre><p>同时，在/home/mch/hbase-1.2.4/目录下新建logs和pids目录</p>
+<pre><code># mkdir logs pids data
+</code></pre><p>在/hbase-1.2.4/conf目录下修改regionserver</p>
+<pre><code># vim regionservers
+</code></pre><p>将里面的localhost删除并添加如下内容：</p>
+<pre><code>hadoop1
+
+hadoop2
+
+hadoop3
+</code></pre><p>在/hbase-1.2.4/conf目录下修改hbase-site.xml</p>
+<pre><code># vim hbase-site.xml
+</code></pre><p>修改内容如下：</p>
+<pre><code>&lt;configuration&gt;
+
+    &lt;!-- 指定RegionServer的共享目录 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;hbase.rootdir&lt;/name&gt;
+        &lt;value&gt;hdfs://hadoop1:9000/hbase&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定HBase的运行模式为分布式 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;
+        &lt;value&gt;true&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定Zookeeper集群的地址列表 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;
+        &lt;value&gt;hadoop1,hadoop2,hadoop3&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定HBase的主节点地址 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;hbase.master&lt;/name&gt;
+        &lt;value&gt;hdfs://hadoop1:60000&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定快照的存储位置 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;hbase.zookeeper.property.dataDir&lt;/name&gt;
+        &lt;value&gt;/opt/zookeeper-3.4.9/data&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定客户端连接的端口 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;hbase.zookeeper.property.clientPort&lt;/name&gt;
+        &lt;value&gt;2181&lt;/value&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre><p>将hbase-1.2.4目录拷贝给其他节点</p>
+<pre><code># scp –r /opt/hbase-1.2.4 slave1:/opt
+
+# scp –r /opt/hbase-1.2.4 slave2:/opt
+</code></pre><h2 id="三-启动HBase"><a href="#三-启动HBase" class="headerlink" title="三 启动HBase"></a>三 启动HBase</h2><pre><code># cd /opt/hbase-1.2.4/bin
+
+# ./start-hbase.sh
+</code></pre><blockquote>
+<p>注意：</p>
+<p>各个服务启动情况：hadoop-&gt;zookeeper-&gt;hbase</p>
+<p>（1）启动Hadoop只需在主节点上执行# ./start-all.sh start</p>
+<p>（2）启动Zookeeper需要在各个节点上执行# ./zkServer.sh start</p>
+<p>（3）启动HBase只需在主节点上执行# ./start-hbase.sh start</p>
+</blockquote>
+<h2 id="四-查看HBase是否安装成功"><a href="#四-查看HBase是否安装成功" class="headerlink" title="四 查看HBase是否安装成功"></a>四 查看HBase是否安装成功</h2><pre><code># hbase shell
+# list
+</code></pre><h2 id="五-遇到的问题"><a href="#五-遇到的问题" class="headerlink" title="五 遇到的问题"></a>五 遇到的问题</h2><p><strong>1.Main进程</strong></p>
+<p>在hbase shell下，使用ctrl+z退出后查看进程会多出一个Main进程，ctrl+z退出几次，就会有几个Main进程，所以最好使用quit退出。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	  <div>
+        
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/Hadoop集群搭建之Zookeeper安装/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MaoConghui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MaoConghui">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/20/Hadoop集群搭建之Zookeeper安装/" itemprop="url">Hadoop集群搭建之Zookeeper安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-20T17:20:00+08:00">
+                2019-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一-集群规划"><a href="#一-集群规划" class="headerlink" title="一 集群规划"></a>一 集群规划</h2><table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>IP</th>
+<th>集群规划</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hadoop1</td>
+<td>192.168.159.129</td>
+<td>NameNode、DataNode、NodeManager、ResourceManager、Zookeeper</td>
+</tr>
+<tr>
+<td>hadoop2</td>
+<td>192.168.159.130</td>
+<td>SecondaryNameNode、DataNode、NodeManager、Zookeeper</td>
+</tr>
+<tr>
+<td>hadoop3</td>
+<td>192.168.159.131</td>
+<td>DataNode、NodeManager、Zookeeper</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二-配置Zookeeper信息"><a href="#二-配置Zookeeper信息" class="headerlink" title="二 配置Zookeeper信息"></a>二 配置Zookeeper信息</h2><p>将zookeeper压缩包放在/home/mch目录下，并进行解压。</p>
+<pre><code># tar -zxvf zookeeper-3.4.9.tar.gz
+</code></pre><p>配置zookeeper环境变量</p>
+<pre><code># vi /etc/profile
+</code></pre><p>增加如下信息：</p>
+<pre><code>export ZOOKEEPER_HOME=/home/mch/zookeeper-3.4.9
+
+export PATH=$ZOOKEEPER_HOME/bin:$PATH
+</code></pre><p>然后生效该文件</p>
+<pre><code># source /etc/profile
+</code></pre><p>在zookeeper-3.4.9中创建data和logs文件</p>
+<pre><code># mkdir data logs
+</code></pre><p>在data文件中新建myid文件，并编辑为1.</p>
+<pre><code># vi myid
+</code></pre><p>进入到/home/mch/zookeeper-3.4.9/conf目录下，将zoo_sample.cfg重命名为zoo.cfg</p>
+<pre><code># mv zoo_sample.cfg zoo.cfg
+</code></pre><p>编辑zoo.cfg信息</p>
+<pre><code># vi zoo.cfg
+</code></pre><p>修改内容如下：</p>
+<pre><code>dataDir=/home/mch/zookeeper-3.4.9/data
+
+dataLogDir=/home/mch/zookeeper-3.4.9/logs
+
+server.1=192.168.159.129:2888:3888  #server.1、server.2、server.3分别对应myid下的1、2、3    
+
+server.2=192.168.159.130:2888:3888    
+
+server.3=192.168.159.131:2888:3888
+</code></pre><p>将hadoop1节点下的zookeeper-3.4.9目录拷贝到hadoop2和hadoop3中</p>
+<pre><code># scp -r zookeeper-3.4.9 hadoop2:/home/mch
+
+# scp -r zookeeper-3.4.9 hadoop3:/home/mch
+</code></pre><p>修改hadoop2和hadoop3中的myid文件内容分别为2和3。</p>
+<h2 id="三-启动Zookeeper"><a href="#三-启动Zookeeper" class="headerlink" title="三 启动Zookeeper"></a>三 启动Zookeeper</h2><p>在三个节点上分别启动zookeeper服务</p>
+<pre><code># cd /home/mch/zookeeper-3.4.9/bin
+
+# ./zkServer.sh start
+</code></pre><p>查看三个节点中是否都有Zookeeper进程</p>
+<pre><code># jps
+</code></pre><h2 id="四-查看zookeeper状态"><a href="#四-查看zookeeper状态" class="headerlink" title="四 查看zookeeper状态"></a>四 查看zookeeper状态</h2><pre><code># ./zkServer.sh status
+</code></pre><p>根据paxos选举规则，可以得到一个master，两个slave</p>
+<h2 id="五-遇到的问题"><a href="#五-遇到的问题" class="headerlink" title="五 遇到的问题"></a>五 遇到的问题</h2><p><strong>—–Zookeeper状态显示Error contacting service. It is probably not running.—–</strong></p>
+<p>查看配置是否出错，myid是否写错。</p>
+<p><strong>—–出现Error Contacting Service,It is probably not running.—–</strong></p>
+<p>Zookeeper开启的台数没有大于一半，</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	  <div>
+        
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/Hadoop伪分布式集群搭建/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MaoConghui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MaoConghui">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/20/Hadoop伪分布式集群搭建/" itemprop="url">Hadoop伪分布式集群搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-20T14:06:00+08:00">
+                2019-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一-配置环境及规划"><a href="#一-配置环境及规划" class="headerlink" title="一 配置环境及规划"></a>一 配置环境及规划</h2><table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>IP</th>
+<th>集群规划</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hadoop1</td>
+<td>192.168.159.129</td>
+<td>NameNode、DataNode、NodeManager、ResourceManager</td>
+</tr>
+<tr>
+<td>hadoop2</td>
+<td>192.168.159.130</td>
+<td>SecondaryNameNode、DataNode、NodeManager</td>
+</tr>
+<tr>
+<td>hadoop3</td>
+<td>192.168.159.131</td>
+<td>DataNode、NodeManager</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二-环境搭建及配置"><a href="#二-环境搭建及配置" class="headerlink" title="二 环境搭建及配置"></a>二 环境搭建及配置</h2><h4 id="1-Linux环境搭建"><a href="#1-Linux环境搭建" class="headerlink" title="1 Linux环境搭建"></a>1 Linux环境搭建</h4><p>下载VMWare Workstation，搭建Linux环境（典型），安装CentOS7系统，并命名为hadoop1。</p>
+<blockquote>
+<p>注意：安装镜像文件时若显示无法检测到操作系统，则选择稍后安装，下一步之后点击自定义硬件，在新CD/DVD中添加镜像文件。</p>
+</blockquote>
+<p>然后克隆两个虚拟机，在虚拟机-管理-克隆-创建完整克隆，并重命名hadoop2，hadoop3。</p>
+<blockquote>
+<p>注意：克隆的节点与主节点的ip地址是一样的，所以为了避免地址冲突，需要对克隆后的节点进行网络配置。</p>
+</blockquote>
+<h4 id="2-网络配置"><a href="#2-网络配置" class="headerlink" title="2 网络配置"></a>2 网络配置</h4><p>对三个节点进行网络配置，进入/etc/sysconfig/network-scripts目录,修改第一个形如ifcfg-ens的文件。</p>
+<pre><code># cd /etc/sysconfig/network-scripts
+
+# vim ifcfg-ens33
+</code></pre><p>修改并添加信息如下：</p>
+<pre><code>ONBOOT=yes
+
+BOOTPROTO=static
+
+IPADDR=192.168.159.129 #根据网关自行调整【ip add】
+
+PREFIX=255.255.255.0  #注意需要使用PREFIX
+
+GATEWAY=192.168.159.2
+
+DNS1=114.114.114.114
+
+DNS2=202.96.134.133
+</code></pre><p>然后重启网络：</p>
+<pre><code># systemctl restart network.service
+</code></pre><p>测试网络：</p>
+<pre><code># ping www.baidu.com
+</code></pre><p>在hadoop2和hadoop3的ifcfg-ens文件中配置其ip。</p>
+<pre><code># vi ifcfg-ens33
+</code></pre><p>设置集群的主机名</p>
+<pre><code># hostnamectl set-hostname hadoop2
+</code></pre><p>设置如下：</p>
+<pre><code>192.168.159.129 hadoop1
+
+192.168.159.130 hadoop2
+
+192.168.159.131 hadoop3
+</code></pre><h4 id="3-关闭防火墙"><a href="#3-关闭防火墙" class="headerlink" title="3 关闭防火墙"></a>3 关闭防火墙</h4><p>端口绑定了防火墙，所以需要关闭（三个节点都关闭）。</p>
+<pre><code># systemctl stop firewalld.service  #关闭防火墙
+
+# systemctl disable firewalld.service  #禁止开机启动
+
+# vim /etc/selinux/config  #设置selinux = disabled
+</code></pre><h4 id="4-配置SSH免密登录"><a href="#4-配置SSH免密登录" class="headerlink" title="4 配置SSH免密登录"></a>4 配置SSH免密登录</h4><p>当搭建linux集群环境的时候，从一个节点登录到另一个节点，通过ssh方式，每次登录跳转都需要输入密码，这样造成非常不便，其实可以通过配置SSH互信，来实现集群节点间的免密码登录跳转。</p>
+<p><strong>公钥认证的基本思想：</strong> 对信息的加密和解密采用不同的key，这对key分别称作private key和public key，其中，public key存放在欲登录的服务器上，而private key为特定的客户机所持有。当客户机向服务器发出建立安全连接的请求时，首先发送自己的public key，如果这个public key是被服务器所允许的，服务器就发送一个经过public key加密的随机数据给客户机，这个数据只能通过private key解密，客户机将解密后的信息发还给服务器，服务器验证正确后即确认客户机是可信任的，从而建立起一条安全的信息通道。通过这种方式，客户机不需要向外发送自己的身份标志“private key”即可达到校验的目的，并且private key是不能通过public key反向推断出来的。这避免了网络窃听可能造成的密码泄露。客户机需要小心的保存自己的private key，以免被其他人窃取，一旦这样的事情发生，就需要各服务器更换受信的public key列表。 </p>
+<p>简言之，当我们在搭建集群过程中，在集群中机器间相互通信的时候，会不断的提示你输入通信机器的密码，然而当我们建立起集群间的ssh互信后，任意两台机器之间可以无密码的方便通信。</p>
+<h5 id="4-1-创建公钥秘钥"><a href="#4-1-创建公钥秘钥" class="headerlink" title="4.1 创建公钥秘钥"></a>4.1 创建公钥秘钥</h5><pre><code># mkdir ~/.ssh  #创建.ssh目录（如果目录存在，就不必要创建）
+
+# chmod  700 ~/.ssh  #更改.ssh权限
+
+# cd ~/.ssh  #进入.ssh目录
+
+# ssh-keygen -t rsa  
+</code></pre><p>以上操作三个节点都要设置</p>
+<h5 id="4-2-修改hosts文件"><a href="#4-2-修改hosts文件" class="headerlink" title="4.2 修改hosts文件"></a>4.2 修改hosts文件</h5><pre><code># vi /etc/hosts
+</code></pre><p>添加如下信息：</p>
+<pre><code>192.168.159.129 hadoop1
+
+192.168.159.130 hadoop2
+
+192.168.159.131 hadoop3
+</code></pre><p>以上操作只在主节点上设置</p>
+<h5 id="4-3-整合公钥文件"><a href="#4-3-整合公钥文件" class="headerlink" title="4.3 整合公钥文件"></a>4.3 整合公钥文件</h5><p>将hadoop1中的id_rsa.pub拷贝到其他服务器中</p>
+<pre><code># cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys  
+
+# ssh hadoop2 cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+
+# ssh hadoop3 cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+
+# chmod 600 ~/.ssh/authorized_keys
+</code></pre><h5 id="4-4-分发整合后的公钥文件"><a href="#4-4-分发整合后的公钥文件" class="headerlink" title="4.4 分发整合后的公钥文件"></a>4.4 分发整合后的公钥文件</h5><p>将整合后的公钥文件从hadoop1分别复制到hadoop2和hadoop3上</p>
+<pre><code># scp ~/.ssh/authorized_keys hadoop2:~/.ssh/
+
+# scp ~/.ssh/authorized_keys hadoop3:~/.ssh/
+</code></pre><h4 id="5-分发hosts文件"><a href="#5-分发hosts文件" class="headerlink" title="5 分发hosts文件"></a>5 分发hosts文件</h4><p>我们需要将我们在hadoop1节点上配置的hosts文件分发到所有的节点上，在hadoop1节点上输入如下命令：</p>
+<pre><code># scp /etc/hosts hadoop2:/etc
+
+# scp /etc/hosts hadoop3:/etc
+</code></pre><h4 id="6-测试SSH互信（三个节点都设置）"><a href="#6-测试SSH互信（三个节点都设置）" class="headerlink" title="6 测试SSH互信（三个节点都设置）"></a>6 测试SSH互信（三个节点都设置）</h4><p>在各个节点上运行以下命令，若不需要输入密码就显示系统当前日期，就说明SSH互信已经配置成功了，在hadoop1节点上输入以下命令：</p>
+<pre><code># ssh hadoop2 date
+
+# ssh hadoop3 date
+</code></pre><p>然后分别在hadoop2和hadoop3节点分别输入以下命令：</p>
+<pre><code># ssh hadoop1 date
+
+# ssh hadoop3 date
+
+# ssh hadoop1 date
+
+# ssh hadoop2 date
+</code></pre><h4 id="7-设置时间同步"><a href="#7-设置时间同步" class="headerlink" title="7 设置时间同步"></a>7 设置时间同步</h4><p>利用NTP将三个节点的时间设置为同步（一个服务端，两个客户端）</p>
+<p>如果一个集群中，时间相差很大，那么会出现很多诡异的问题。所以，设置服务器之间时间同步是必不可少的！</p>
+<h5 id="7-1-准备工作"><a href="#7-1-准备工作" class="headerlink" title="7.1 准备工作"></a>7.1 准备工作</h5><p>首先安装ntp</p>
+<pre><code># yum install ntp
+</code></pre><p>安装完毕之后，启动服务</p>
+<pre><code># systemctl start ntpd.service
+</code></pre><p>设置开机自启动</p>
+<pre><code># systemctl enable ntpd.service
+</code></pre><p>以上操作三个节点都要设置</p>
+<h5 id="7-2-NTP服务端设置"><a href="#7-2-NTP服务端设置" class="headerlink" title="7.2 NTP服务端设置"></a>7.2 NTP服务端设置</h5><p>第一台服务器192.168.159.129，即hadoop1，作为ntpserver，将他设置为同步外网时间（ntpd服务开启默认就同步了），但是得设置允许内网网段可以连接它，将它作为内网的时间同步服务器。</p>
+<p>修改/etc/ntp.conf文件</p>
+<pre><code># vim /etc/ntp.conf
+</code></pre><p>添加如下信息，表示允许159网段来同步此服务器</p>
+<pre><code>restrict 192.168.159.0 mask 255.255.255.0
+</code></pre><p>设置后，重启ntpd服务，用ntpstat来检查效果</p>
+<pre><code># systemctl restart ntpd
+
+# ntpstat
+</code></pre><h5 id="7-3-NTP客户端设置（在hadoop2和hadoop3两个节点上设置）"><a href="#7-3-NTP客户端设置（在hadoop2和hadoop3两个节点上设置）" class="headerlink" title="7.3 NTP客户端设置（在hadoop2和hadoop3两个节点上设置）"></a>7.3 NTP客户端设置（在hadoop2和hadoop3两个节点上设置）</h5><p>第二、三台服务器192.168.159.130，192.168.159.131，即hadoop2和hadoop3，作为ntpclient，将他设置为同步上面的ntpserver，分别在两个节点上做如下配置。 </p>
+<p>修改/etc/ntp.conf文件</p>
+<pre><code># vim /etc/ntp.conf
+</code></pre><p>注释掉外网时间服务器，添加本地服务器即可</p>
+<pre><code>server 192.168.159.130  #添加此行（131服务器上则添加server 192.168.159.131）
+
+# server 0.centos.pool.ntp.org iburst  #以下四行注释掉
+
+# server 1.centos.pool.ntp.org iburst
+
+# server 2.centos.pool.ntp.org iburst
+
+# server 3.centos.pool.ntp.org iburst
+</code></pre><p>设置后，重启ntpd服务，用ntpstat来检查效果</p>
+<pre><code># systemctl restart ntpd
+
+# ntpstat 
+</code></pre><h4 id="8-安装jdk"><a href="#8-安装jdk" class="headerlink" title="8 安装jdk"></a>8 安装jdk</h4><p>下载想安装的jdk版本之后，将压缩包放到/home/mch目录，解压缩后，更名为jdk1.8</p>
+<pre><code># cd /home/mch  #进入到压缩包所在目录下
+
+# tar -xzvf jdk-8u152-linux-x64.tar.gz  #解压Linux版本的jdk解压包
+
+# mv jdk1.8.0_111 jdk1.8  #重命名文件夹
+</code></pre><p>配置环境变量，修改/etc/profile文件</p>
+<pre><code># vim /etc/profile
+</code></pre><p>在最下方添加三行配置</p>
+<pre><code>export JAVA_HOME=/home/mch/jdk1.8
+
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+export PATH=$PATH:$JAVA_HOME/bin
+</code></pre><p>使修改内容生效</p>
+<pre><code># source /etc/profile
+</code></pre><p>以上操作三个节点都要设置</p>
+<h4 id="9-安装mysql"><a href="#9-安装mysql" class="headerlink" title="9 安装mysql"></a>9 安装mysql</h4><p>官网下载安装mysql-server</p>
+<pre><code># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+
+# rpm -ivh mysql-community-release-el7-5.noarch.rpm
+
+# yum install mysql-community-server
+</code></pre><p>安装成功后重启mysql服务</p>
+<pre><code># systemctl restart mysqld.service
+
+# systemctl enable mysqld.service  #设置mysql允许开机自启动
+</code></pre><blockquote>
+<p>mysql只需要在主节点安装。</p>
+</blockquote>
+<h2 id="三-安装配置Hadoop2-7-2集群"><a href="#三-安装配置Hadoop2-7-2集群" class="headerlink" title="三 安装配置Hadoop2.7.2集群"></a>三 安装配置Hadoop2.7.2集群</h2><h4 id="1-安装hadoop"><a href="#1-安装hadoop" class="headerlink" title="1 安装hadoop"></a>1 安装hadoop</h4><p>将下载的hadoop2.6.0压缩包，上传到主节点的目录下</p>
+<pre><code># cd /home/mch
+</code></pre><p>进行解压缩</p>
+<pre><code># tar -xzvf hadoop-2.6.0-x64.tar.gz
+</code></pre><p>修改目录为hadoop2.6.0</p>
+<pre><code># mv hadoop-2.6.0 hadoop2.6.0    
+</code></pre><p>修改配置文件，加入hadoop的环境变量</p>
+<pre><code># vim /etc/profile    
+</code></pre><p>增加内容如下</p>
+<pre><code>export JAVA_HOME=/home/mch/jdk1.8
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin
+export HADOOP_HOME=/home/mch/hadoop2.6.0
+export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
+</code></pre><p>新建所需目录</p>
+<pre><code># mkdir  /home/mch/hadoop2.6.0/tmp 
+
+# mkdir  /home/mch/hadoop2.6.0/var  
+
+#mkdir  /home/mch/hadoop2.6.0/dfs  
+
+# mkdir  /home/mch/hadoop2.6.0/dfs/name  
+
+# mkdir  /home/mch/hadoop2.6.0/dfs/data  
+</code></pre><h4 id="2-修改hadoop-env-sh文件"><a href="#2-修改hadoop-env-sh文件" class="headerlink" title="2 修改hadoop-env.sh文件"></a>2 修改hadoop-env.sh文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/
+
+# vim hadoop-env.sh
+</code></pre><p>将:export JAVA_HOME=${JAVA_HOME} </p>
+<p>修改为：export JAVA_HOME=/home/mch/jdk1.8 #修改为jdk目录</p>
+<h4 id="3-修改slaves文件"><a href="#3-修改slaves文件" class="headerlink" title="3 修改slaves文件"></a>3 修改slaves文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/
+
+# vim slaves
+</code></pre><p>增加如下内容</p>
+<pre><code>hadoop2
+
+hadoop3
+</code></pre><p>此时hadoop1作为主节点，以及主备节点，管理节点，而同时hadoop1，hadoop2，hadoop3都作为数据节点。</p>
+<h4 id="4-修改core-site-xml文件"><a href="#4-修改core-site-xml文件" class="headerlink" title="4 修改core-site.xml文件"></a>4 修改core-site.xml文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/ 
+
+# vim core-site.xml
+</code></pre><p>修改内容如下</p>
+<pre><code>&lt;configuration&gt;
+
+    &lt;!-- 指定hadoop的临时目录 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;/home/mch/hadoop2.6.0/tmp&lt;/value&gt;
+        &lt;description&gt;Abase for other temporary directories.&lt;/description&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定集群中NameNode结点的URI(包括协议、主机名称、端口号) --&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.default.name&lt;/name&gt;
+        &lt;value&gt;hdfs://hadoop1:9000&lt;/value&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre><h4 id="5-修改hdfs-site-xml文件"><a href="#5-修改hdfs-site-xml文件" class="headerlink" title="5 修改hdfs-site.xml文件"></a>5 修改hdfs-site.xml文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/ 
+
+# vim hdfs-site.xml
+</code></pre><p>修改内容如下</p>
+<pre><code>&lt;configuration&gt;
+
+    &lt;!-- 设置NameNode的http通讯地址 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;
+        &lt;value&gt;hadoop1:50070&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定SecondaryNameNode的http通讯地址 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;
+        &lt;value&gt;hadoop2:50090&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定NameNode结点存储hadoop文件系统信息的本地系统路径 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+        &lt;value&gt;/home/mch/hadoop2.6.0/dfs/name&lt;/value&gt;
+        &lt;description&gt;Path on the local filesystem where theNameNode stores the namespace and transactions logs persistently.&lt;/description&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定DataNode结点被指定要存储数据的本地文件系统路径 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+        &lt;value&gt;/home/mch/hadoop2.6.0/dfs/data&lt;/value&gt;
+        &lt;description&gt;Comma separated list of paths on the localfilesystem of a DataNode where it should store its blocks.&lt;/description&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定系统文件块的数据备份个数 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;3&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 关闭hadoop目录的权限 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.permissions&lt;/name&gt;
+        &lt;value&gt;false&lt;/value&gt;
+        &lt;description&gt;need not permissions&lt;/description&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre><h4 id="6-修改mapred-site-xml文件"><a href="#6-修改mapred-site-xml文件" class="headerlink" title="6 修改mapred-site.xml文件"></a>6 修改mapred-site.xml文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/ 
+# cp mapred-site.xml.template mapred-site.xml  
+# vim hdfs-site.xml
+</code></pre><p>修改内容如下</p>
+<pre><code>&lt;configuration&gt;
+
+    &lt;!-- 指定JobTracker的主机和端口 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapreduce.job.tracker&lt;/name&gt;
+        &lt;value&gt;hadoop1:49001&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定MapReduce框架为Yarn方式 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+        &lt;value&gt;yarn&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><h4 id="7-修改yarn-site-xml文件"><a href="#7-修改yarn-site-xml文件" class="headerlink" title="7 修改yarn-site.xml文件"></a>7 修改yarn-site.xml文件</h4><pre><code># cd /home/mch/hadoop2.6.0/etc/hadoop/ 
+# vim yarn-site.xml
+</code></pre><p>修改内容如下</p>
+<pre><code>&lt;configuration&gt;
+
+    &lt;!-- 指定ResourceManager所在节点的主机名 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
+        &lt;value&gt;hadoop1&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定ResourceManager提供给客户端访问的地址 --&gt;
+    &lt;property&gt;
+        &lt;description&gt;The address of the applications manager interface in the RM.&lt;/description&gt;
+        &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;
+        &lt;value&gt;${yarn.resourcemanager.hostname}:8032&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定NodeManager执行的服务 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 指定向ResourceManager申请的最大内存量 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.scheduler.maximum-allocation-mb&lt;/name&gt;
+        &lt;value&gt;12288&lt;/value&gt;
+        &lt;discription&gt;每个节点可用内存,单位MB,默认8182MB&lt;/discription&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre><p>在主节点上配置好hadoop包后，同步到另外两个节点，配置不用修改，三个节点的配置都一样！</p>
+<blockquote>
+<p>注意：<br>在实际应用中，应将NameNode和SecondaryNameNode配置在不同的节点上，否则当NameNode宕机时，SecondaryNameNode也会故障。</p>
+</blockquote>
+<h2 id="四-hadoop集群的初始化和启动"><a href="#四-hadoop集群的初始化和启动" class="headerlink" title="四 hadoop集群的初始化和启动"></a>四 hadoop集群的初始化和启动</h2><h4 id="1-初始化hadoop集群"><a href="#1-初始化hadoop集群" class="headerlink" title="1 初始化hadoop集群"></a>1 初始化hadoop集群</h4><pre><code># cd /home/mch/hadoop2.7.2/bin 
+
+# ./hadoop namenode -format 
+</code></pre><p>格式化成功后，可以在看到在/home/mch/hadoop2.7.2/dfs/name/目录多了一个current目录，而且该目录内有4个文件。</p>
+<h4 id="2-启动dfs"><a href="#2-启动dfs" class="headerlink" title="2 启动dfs"></a>2 启动dfs</h4><pre><code># cd /home/mch/hadoop2.7.2/sbin 
+
+# ./start-dfs.sh 
+</code></pre><p>在三个节点上分别输入一下命令，查看三个节点上开启的进程</p>
+<pre><code># jps
+</code></pre><p>可以看到在hadoop1中有NameNode、DataNode，在hadoop2中有SecondaryNameNode、DataNode，在hadoop3中有DataNode。</p>
+<h4 id="3-启动yarn"><a href="#3-启动yarn" class="headerlink" title="3 启动yarn"></a>3 启动yarn</h4><pre><code># cd /home/mch/hadoop2.7.2/sbin
+
+# ./start-yarn.sh 
+</code></pre><p>在三个节点上分别输入一下命令，查看三个节点上开启的进程</p>
+<pre><code># jps
+</code></pre><p>可以看到此时hadoop1中多了ResourceManager和NodeManager，hadoop2和hadoop3中分别多了NodeManager。</p>
+<h2 id="五-集群验证"><a href="#五-集群验证" class="headerlink" title="五 集群验证"></a>五 集群验证</h2><p>可通过命令jps来查看集群的进程</p>
+<p>也可通过网页来查看</p>
+<p><a href="http://192.168.159.129:50070" target="_blank" rel="noopener">http://192.168.159.129:50070</a>          </p>
+<p><a href="http://192.168.159.129:8088" target="_blank" rel="noopener">http://192.168.159.129:8088</a></p>
+<h2 id="六-遇到的问题（不定时更新）"><a href="#六-遇到的问题（不定时更新）" class="headerlink" title="六 遇到的问题（不定时更新）"></a>六 遇到的问题（不定时更新）</h2><p><strong>—–DataNode启动失败—–</strong></p>
+<p>有两个原因：</p>
+<p>1、DataNode和NameNode的ClusterID不一致。是由于多次初始化namenode（即./hdfs namenode -format）造成的，每一次format，NameNode都会生成新的ClusterID，而DataNode还是保持原来的ClusterID。</p>
+<p>2、将hadoop1中的配置文件拷贝到其他节点中，文件权限未开启。</p>
+<p>原因1解决办法：</p>
+<p>1.复制hadoop2.7.2/dfs/name/current/VERSION文件中namenode的clusterID.</p>
+<p>2.用该clusterID把所有datanode节点机器中hadoop2.7.2/dfs/data/current/VERSION中的clusterID替换掉</p>
+<p>原因2解决办法：</p>
+<pre><code># chmod 777 -R /home/mch/hadoop2.6.0
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+	  <div>
+        
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/Ganglia监控程序安装/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MaoConghui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MaoConghui">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/02/Ganglia监控程序安装/" itemprop="url">Ganglia监控程序安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-02T18:09:00+08:00">
+                2019-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据集群/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据集群</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>Best or Nothing</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/02/Ganglia监控程序安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+	  <div>
+        
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/03/article/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MaoConghui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MaoConghui">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/03/article/" itemprop="url">test</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T09:39:00+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/test/" itemprop="url" rel="index">
+                    <span itemprop="name">test</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote class="blockquote-center">优秀的人，不是不合群，而是他们合群的人里面没有你</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	  <div>
+        
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/30/hello-world/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MaoConghui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MaoConghui">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/30/hello-world/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-30T19:22:52+08:00">
+                2018-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	  <div>
+        
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="MaoConghui">
+            
+              <p class="site-author-name" itemprop="name">MaoConghui</p>
+              <p class="site-description motion-element" itemprop="description">Better late than never</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/maoconghui" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="chmao_sunny@126.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MaoConghui</span>
+
+  
+</div>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+-->
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<!--
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共5.7k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
     }
-  }
+    var path = "/" + search_path;
+    // monitor main search box;
 
-  // UC不支持跨域，所以直接显示
-  function asyncCb(){
-    if (browser.versions.uc) {
-      console.log("UCBrowser");
-      fontLoaded();
-    } else {
-      WebFont.load({
-        custom: {
-          families: ['Oswald-Regular']
-        },
-        loading: function () {  //所有字体开始加载
-          // console.log('loading');
-        },
-        active: function () {  //所有字体已渲染
-          fontLoaded();
-        },
-        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
-          console.log('inactive: timeout');
-          fontLoaded();
-        },
-        timeout: 5000 // Set the timeout to two seconds
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
       });
     }
-  }
 
-  function asyncErr(){
-    console.warn('script load from CDN failed, will load local script')
-  }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
 
-  // load webfont-loader async, and add callback function
-  function async(u, cb, err) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
-    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
-  }
-
-  var asyncLoadWithFallBack = function(arr, success, reject) {
-      var currReject = function(){
-        reject()
-        arr.shift()
-        if(arr.length)
-          async(arr[0], success, currReject)
-        }
-
-      async(arr[0], success, currReject)
-  }
-
-  asyncLoadWithFallBack([
-    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
-    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
-    "/lib/webfontloader.min.js"
-  ], asyncCb, asyncErr)
-</script>        
-        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
-        <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/22/Hadoop集群搭建之HBase安装 /">
-            
-                <span>Hadoop集群搭建之HBase安装</span>
-        </a>
-        <div class="abstract-content">
-            一 集群规划
-
-
-主机名
-IP
-集群规划
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 
 
-hadoop1
-192.168.159.129
-NameNode、DataNode、NodeManager、ResourceManager、Zookeeper、HMaster
 
+  
 
-hadoop2
-192.168.159.130
-SecondaryNameNode、DataNode、NodeManager、Zookeeper、HRegionServer
+  
 
+  
 
-hadoop3
-192.168.159.131
-DataNode、NodeManager、Zookeeper、HRegionServer
+  
+  
 
+  
 
+  
 
-二 配置HBase信息将压缩包hbase-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Hadoop HBase">Hadoop HBase</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/20/Hadoop集群搭建之Zookeeper安装/">
-            
-                <span>Hadoop集群搭建之Zookeeper安装</span>
-        </a>
-        <div class="abstract-content">
-            一 集群规划
+  
 
-
-主机名
-IP
-集群规划
-
-
-
-
-hadoop1
-192.168.159.129
-NameNode、DataNode、NodeManager、ResourceManager、Zookeeper
-
-
-hadoop2
-192.168.159.130
-SecondaryNameNode、DataNode、NodeManager、Zookeeper
-
-
-hadoop3
-192.168.159.131
-DataNode、NodeManager、Zookeeper
-
-
-
-二 配置Zookeeper信息将zookeeper压缩包放在/home/mch目录下，并进行解压。
-# tar -...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/20</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Hadoop Zookeeper">Hadoop Zookeeper</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/20/Hadoop伪分布式集群搭建/">
-            
-                <span>Hadoop伪分布式集群搭建</span>
-        </a>
-        <div class="abstract-content">
-            一 配置环境及规划
-
-
-主机名
-IP
-集群规划
-
-
-
-
-hadoop1
-192.168.159.129
-NameNode、DataNode、NodeManager、ResourceManager
-
-
-hadoop2
-192.168.159.130
-SecondaryNameNode、DataNode、NodeManager
-
-
-hadoop3
-192.168.159.131
-DataNode、NodeManager
-
-
-
-二 环境搭建及配置1 Linux环境搭建下载VMWare Workstation，搭建Linux环境（典型），安装CentOS7系统，并命名为hadoop1。
-
-注意：...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/20</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Hadoop NameNode DataNode">Hadoop NameNode DataNode</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/02/Ganglia监控程序安装/">
-            
-                <span>Ganglia监控程序安装</span>
-        </a>
-        <div class="abstract-content">
-            一 配置环境及规划
-
-
-主机名
-IP
-集群规划
-
-
-
-
-hadoop1
-192.168.159.129
-NameNode、Zookeeper、ResourceManager、HMaster、HRegionServer、gmetad、gmond、gweb
-
-
-hadoop2
-192.168.159.130
-NameNode、Zookeeper、ResourceManager、HMaster、HRegionServer、gmond
-
-
-hadoop3
-192.168.159.131
-DataNode、Zookeeper、NodeManager、HRegionServer、gmond
-
-
-
-二...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/02</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Ganglia 监控 Hadoop HBase">Ganglia 监控 Hadoop HBase</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/12/03/article/">
-            
-                <span>test</span>
-        </a>
-        <div class="abstract-content">
-            优秀的人，不是不合群，而是他们合群的人里面没有你
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="test 测试">test 测试</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/30/hello-world/">
-            
-                <span>Hello World</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/30</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    <!-- paginator  -->
-    
-</main>
-            <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" alt="avatar" src="/avatar/20181201112207.jpg">
-    <div class="profile-name">MaoConghui</div>
-    
-    <div class="profile-signature">
-        Better late than never
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:815136388@qq.com" class="iconfont-archer email" title="email"></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/maoconghui" class="iconfont-archer github" target="_blank" title="github"></a>
-            
-        
-    
-        
-            
-                <span class="iconfont-archer wechat" title="wechat">
-                  
-                  <img class="profile-qr" src="/avatar/20181201114225.jpg">
-                </span>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-                    <span>
-                        <a href="//www.baidu.com" target="_black">friendA</a>
-                    </span>
-                
-            
-                
-                    <span>
-                        <a href="//www.google.com" target="_black">friendB</a>
-                    </span>
-                
-            
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href="/about">ABOUT ME</a>
-        </div>
-    
-</div>
-            
-        </div>
-        <footer class="footer footer-unloaded">
-    <!-- social  -->
-    
-    <div class="social">
-        
-    
-        
-            
-                <a href="mailto:815136388@qq.com" class="iconfont-archer email" title="email"></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/maoconghui" class="iconfont-archer github" target="_blank" title="github"></a>
-            
-        
-    
-        
-            
-                <span class="iconfont-archer wechat" title="wechat">
-                  
-                  <img class="profile-qr" src="/avatar/20181201114225.jpg">
-                </span>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-    </div>
-    
-    <!-- powered by Hexo  -->
-    <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
-    </div>
-    <!-- 不蒜子  -->
-    
-    <div class="busuanzi-container">
-    
-     
-    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
-    
-    </div>
-    
-</footer>
-    </div>
-    <!-- toc -->
-    
-    <div class="back-top iconfont-archer">&#xe639;</div>
-    <div class="sidebar sidebar-hide">
-    <ul class="sidebar-tabs sidebar-tabs-active-0">
-        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
-        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
-        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
-    </ul>
-    <div class="sidebar-content sidebar-content-show-archive">
-          <div class="sidebar-panel-archives">
-    <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-and-search">
-        <div class="total-archive">
-        Total : 6
-        </div>
-        <!-- search  -->
-        
-    </div>
-    
-    <div class="post-archive">
-    
-    
-    
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/22</span><a class="archive-post-title" href="/2019/03/22/Hadoop集群搭建之HBase安装 /">Hadoop集群搭建之HBase安装</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/20</span><a class="archive-post-title" href="/2019/03/20/Hadoop集群搭建之Zookeeper安装/">Hadoop集群搭建之Zookeeper安装</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/20</span><a class="archive-post-title" href="/2019/03/20/Hadoop伪分布式集群搭建/">Hadoop伪分布式集群搭建</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/02</span><a class="archive-post-title" href="/2019/03/02/Ganglia监控程序安装/">Ganglia监控程序安装</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2018 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/03</span><a class="archive-post-title" href="/2018/12/03/article/">test</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2018/11/30/hello-world/">Hello World</a>
-        </li>
-    
-    </ul></div>
-  </div>
-        <div class="sidebar-panel-tags">
-    <div class="sidebar-tags-name">
-    
-        <span class="sidebar-tag-name" data-tags="Ganglia 监控 Hadoop HBase"><span class="iconfont-archer">&#xe606;</span>Ganglia 监控 Hadoop HBase</span>
-    
-        <span class="sidebar-tag-name" data-tags="Hadoop HBase"><span class="iconfont-archer">&#xe606;</span>Hadoop HBase</span>
-    
-        <span class="sidebar-tag-name" data-tags="Hadoop Zookeeper"><span class="iconfont-archer">&#xe606;</span>Hadoop Zookeeper</span>
-    
-        <span class="sidebar-tag-name" data-tags="test 测试"><span class="iconfont-archer">&#xe606;</span>test 测试</span>
-    
-        <span class="sidebar-tag-name" data-tags="Hadoop NameNode DataNode"><span class="iconfont-archer">&#xe606;</span>Hadoop NameNode DataNode</span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-    缺失模块。<br>
-    1、请确保node版本大于6.2<br>
-    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
-    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
-    3、在根目录_config.yml里添加配置：
-    <pre style="color: #787878; font-size: 0.6rem;">
-jsonContent:
-  meta: false
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: false
-    comments: false
-    link: false
-    permalink: false
-    excerpt: false
-    categories: true
-    tags: true</pre>
-    </div> 
-    <div class="sidebar-tags-list"></div>
-</div>
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
-    </div>
-</div> 
-    <script>
-    var siteMeta = {
-        root: "/",
-        author: "MaoConghui"
-    }
-</script>
-    <!-- CDN failover -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ === 'undefined')
-        {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
-        }
-    </script>
-    <script src="/scripts/main.js"></script>
-    <!-- algolia -->
-    
-    <!-- busuanzi  -->
-    
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    <!-- CNZZ  -->
-    
-    </div>
-    <!-- async load share.js -->
-     
-    </body>
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
 </html>
-
-
