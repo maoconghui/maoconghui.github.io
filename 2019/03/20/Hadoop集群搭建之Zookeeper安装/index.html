@@ -71,7 +71,7 @@
 
 
 
-  <meta name="keywords" content="Hadoop Zookeeper,">
+  <meta name="keywords" content="Hadoop,Zookeeper,">
 
 
 
@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="一 集群规划   主机名 IP 集群规划     hadoop1 192.168.159.129 NameNode、DataNode、NodeManager、ResourceManager、Zookeeper   hadoop2 192.168.159.130 SecondaryNameNode、DataNode、NodeManager、Zookeeper   hadoop3 192.168.15">
-<meta name="keywords" content="Hadoop Zookeeper">
+<meta name="description" content="简介Apache ZooKeeper是Apache软件基金会的一个软件项目，他为大型分布式计算提供开源的分布式配置服务、同步服务和命名注册。 ZooKeeper曾经是Hadoop的一个子项目，但现在是一个独立的顶级项目。 ZooKeeper的架构通过冗余服务实现高可用性。">
+<meta name="keywords" content="Hadoop,Zookeeper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop集群搭建之Zookeeper安装">
 <meta property="og:url" content="http://yoursite.com/2019/03/20/Hadoop集群搭建之Zookeeper安装/index.html">
 <meta property="og:site_name" content="MaoConghui">
-<meta property="og:description" content="一 集群规划   主机名 IP 集群规划     hadoop1 192.168.159.129 NameNode、DataNode、NodeManager、ResourceManager、Zookeeper   hadoop2 192.168.159.130 SecondaryNameNode、DataNode、NodeManager、Zookeeper   hadoop3 192.168.15">
+<meta property="og:description" content="简介Apache ZooKeeper是Apache软件基金会的一个软件项目，他为大型分布式计算提供开源的分布式配置服务、同步服务和命名注册。 ZooKeeper曾经是Hadoop的一个子项目，但现在是一个独立的顶级项目。 ZooKeeper的架构通过冗余服务实现高可用性。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-20T12:00:08.586Z">
+<meta property="og:updated_time" content="2019-03-27T03:34:00.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop集群搭建之Zookeeper安装">
-<meta name="twitter:description" content="一 集群规划   主机名 IP 集群规划     hadoop1 192.168.159.129 NameNode、DataNode、NodeManager、ResourceManager、Zookeeper   hadoop2 192.168.159.130 SecondaryNameNode、DataNode、NodeManager、Zookeeper   hadoop3 192.168.15">
+<meta name="twitter:description" content="简介Apache ZooKeeper是Apache软件基金会的一个软件项目，他为大型分布式计算提供开源的分布式配置服务、同步服务和命名注册。 ZooKeeper曾经是Hadoop的一个子项目，但现在是一个独立的顶级项目。 ZooKeeper的架构通过冗余服务实现高可用性。">
 
 
 
@@ -350,6 +350,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据集群/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据集群</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -377,76 +399,64 @@
       
 
       
-        <h2 id="一-集群规划"><a href="#一-集群规划" class="headerlink" title="一 集群规划"></a>一 集群规划</h2><table>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Apache ZooKeeper是Apache软件基金会的一个软件项目，他为大型分布式计算提供开源的分布式配置服务、同步服务和命名注册。 ZooKeeper曾经是Hadoop的一个子项目，但现在是一个独立的顶级项目。 ZooKeeper的架构通过冗余服务实现高可用性。</p>
+<a id="more"></a>
+<h2 id="集群规划"><a href="#集群规划" class="headerlink" title="集群规划"></a>集群规划</h2><table>
 <thead>
 <tr>
-<th>主机名</th>
-<th>IP</th>
-<th>集群规划</th>
+<th style="text-align:center">主机名</th>
+<th style="text-align:center">IP</th>
+<th style="text-align:center">集群规划</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>hadoop1</td>
-<td>192.168.159.129</td>
-<td>NameNode、DataNode、NodeManager、ResourceManager、Zookeeper</td>
+<td style="text-align:center">hadoop1</td>
+<td style="text-align:center">192.168.159.129</td>
+<td style="text-align:center">NameNode、DataNode、NodeManager、ResourceManager、Zookeeper</td>
 </tr>
 <tr>
-<td>hadoop2</td>
-<td>192.168.159.130</td>
-<td>SecondaryNameNode、DataNode、NodeManager、Zookeeper</td>
+<td style="text-align:center">hadoop2</td>
+<td style="text-align:center">192.168.159.130</td>
+<td style="text-align:center">SecondaryNameNode、DataNode、NodeManager、Zookeeper</td>
 </tr>
 <tr>
-<td>hadoop3</td>
-<td>192.168.159.131</td>
-<td>DataNode、NodeManager、Zookeeper</td>
+<td style="text-align:center">hadoop3</td>
+<td style="text-align:center">192.168.159.131</td>
+<td style="text-align:center">DataNode、NodeManager、Zookeeper</td>
 </tr>
 </tbody>
 </table>
-<h2 id="二-配置Zookeeper信息"><a href="#二-配置Zookeeper信息" class="headerlink" title="二 配置Zookeeper信息"></a>二 配置Zookeeper信息</h2><p>将zookeeper压缩包放在/home/mch目录下，并进行解压。</p>
-<pre><code># tar -zxvf zookeeper-3.4.9.tar.gz
-</code></pre><p>配置zookeeper环境变量</p>
-<pre><code># vi /etc/profile
-</code></pre><p>增加如下信息：</p>
-<pre><code>export ZOOKEEPER_HOME=/home/mch/zookeeper-3.4.9
-
-export PATH=$ZOOKEEPER_HOME/bin:$PATH
-</code></pre><p>然后生效该文件</p>
-<pre><code># source /etc/profile
-</code></pre><p>在zookeeper-3.4.9中创建data和logs文件</p>
-<pre><code># mkdir data logs
-</code></pre><p>在data文件中新建myid文件，并编辑为1.</p>
-<pre><code># vi myid
-</code></pre><p>进入到/home/mch/zookeeper-3.4.9/conf目录下，将zoo_sample.cfg重命名为zoo.cfg</p>
-<pre><code># mv zoo_sample.cfg zoo.cfg
-</code></pre><p>编辑zoo.cfg信息</p>
-<pre><code># vi zoo.cfg
-</code></pre><p>修改内容如下：</p>
-<pre><code>dataDir=/home/mch/zookeeper-3.4.9/data
-
-dataLogDir=/home/mch/zookeeper-3.4.9/logs
-
-server.1=192.168.159.129:2888:3888  #server.1、server.2、server.3分别对应myid下的1、2、3    
-
-server.2=192.168.159.130:2888:3888    
-
-server.3=192.168.159.131:2888:3888
-</code></pre><p>将hadoop1节点下的zookeeper-3.4.9目录拷贝到hadoop2和hadoop3中</p>
-<pre><code># scp -r zookeeper-3.4.9 hadoop2:/home/mch
-
-# scp -r zookeeper-3.4.9 hadoop3:/home/mch
-</code></pre><p>修改hadoop2和hadoop3中的myid文件内容分别为2和3。</p>
-<h2 id="三-启动Zookeeper"><a href="#三-启动Zookeeper" class="headerlink" title="三 启动Zookeeper"></a>三 启动Zookeeper</h2><p>在三个节点上分别启动zookeeper服务</p>
-<pre><code># cd /home/mch/zookeeper-3.4.9/bin
-
-# ./zkServer.sh start
-</code></pre><p>查看三个节点中是否都有Zookeeper进程</p>
-<pre><code># jps
-</code></pre><h2 id="四-查看zookeeper状态"><a href="#四-查看zookeeper状态" class="headerlink" title="四 查看zookeeper状态"></a>四 查看zookeeper状态</h2><pre><code># ./zkServer.sh status
-</code></pre><p>根据paxos选举规则，可以得到一个master，两个slave</p>
-<h2 id="五-遇到的问题"><a href="#五-遇到的问题" class="headerlink" title="五 遇到的问题"></a>五 遇到的问题</h2><p><strong>—–Zookeeper状态显示Error contacting service. It is probably not running.—–</strong></p>
+<h2 id="配置Zookeeper信息"><a href="#配置Zookeeper信息" class="headerlink" title="配置Zookeeper信息"></a>配置Zookeeper信息</h2><p>将zookeeper压缩包放在/home/mch目录下，并进行解压。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tar -zxvf zookeeper-3.4.9.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p>配置zookeeper环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /etc/profile</span></span><br></pre></td></tr></table></figure>
+<p>增加如下信息：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export ZOOKEEPER_HOME=/home/mch/zookeeper-3.4.9</span><br><span class="line"></span><br><span class="line">export PATH=$ZOOKEEPER_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>然后生效该文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># source /etc/profile</span></span><br></pre></td></tr></table></figure>
+<p>在zookeeper-3.4.9中创建data和logs文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mkdir data logs</span></span><br></pre></td></tr></table></figure>
+<p>在data文件中新建myid文件，并编辑为1.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi myid</span></span><br></pre></td></tr></table></figure>
+<p>进入到/home/mch/zookeeper-3.4.9/conf目录下，将zoo_sample.cfg重命名为zoo.cfg</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mv zoo_sample.cfg zoo.cfg</span></span><br></pre></td></tr></table></figure>
+<p>编辑zoo.cfg信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi zoo.cfg</span></span><br></pre></td></tr></table></figure>
+<p>修改内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dataDir=/home/mch/zookeeper-3.4.9/data</span><br><span class="line"></span><br><span class="line">dataLogDir=/home/mch/zookeeper-3.4.9/logs</span><br><span class="line"></span><br><span class="line">server.1=192.168.159.129:2888:3888  #server.1、server.2、server.3分别对应myid下的1、2、3    </span><br><span class="line"></span><br><span class="line">server.2=192.168.159.130:2888:3888    </span><br><span class="line"></span><br><span class="line">server.3=192.168.159.131:2888:3888</span><br></pre></td></tr></table></figure>
+<p>将hadoop1节点下的zookeeper-3.4.9目录拷贝到hadoop2和hadoop3中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># scp -r zookeeper-3.4.9 hadoop2:/home/mch</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># scp -r zookeeper-3.4.9 hadoop3:/home/mch</span></span><br></pre></td></tr></table></figure>
+<p>修改hadoop2和hadoop3中的myid文件内容分别为2和3。</p>
+<h2 id="启动Zookeeper"><a href="#启动Zookeeper" class="headerlink" title="启动Zookeeper"></a>启动Zookeeper</h2><p>在三个节点上分别启动zookeeper服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cd /home/mch/zookeeper-3.4.9/bin</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ./zkServer.sh start</span></span><br></pre></td></tr></table></figure>
+<p>查看三个节点中是否都有Zookeeper进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jps</span></span><br></pre></td></tr></table></figure>
+<h2 id="查看zookeeper状态"><a href="#查看zookeeper状态" class="headerlink" title="查看zookeeper状态"></a>查看zookeeper状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ./zkServer.sh status</span></span><br></pre></td></tr></table></figure>
+<p>根据paxos选举规则，可以得到一个master，两个slave</p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p><strong>Zookeeper状态显示Error contacting service. It is probably not running.</strong></p>
 <p>查看配置是否出错，myid是否写错。</p>
-<p><strong>—–出现Error Contacting Service,It is probably not running.—–</strong></p>
+<p><strong>出现Error Contacting Service,It is probably not running.</strong></p>
 <p>Zookeeper开启的台数没有大于一半，</p>
 
       
@@ -471,7 +481,9 @@ server.3=192.168.159.131:2888:3888
       
         <div class="post-tags">
           
-            <a href="/tags/Hadoop-Zookeeper/" rel="tag"># Hadoop Zookeeper</a>
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+            <a href="/tags/Zookeeper/" rel="tag"># Zookeeper</a>
           
         </div>
       
@@ -575,7 +587,7 @@ server.3=192.168.159.131:2888:3888
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -597,7 +609,7 @@ server.3=192.168.159.131:2888:3888
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -646,7 +658,7 @@ server.3=192.168.159.131:2888:3888
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-集群规划"><span class="nav-number">1.</span> <span class="nav-text">一 集群规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-配置Zookeeper信息"><span class="nav-number">2.</span> <span class="nav-text">二 配置Zookeeper信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-启动Zookeeper"><span class="nav-number">3.</span> <span class="nav-text">三 启动Zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-查看zookeeper状态"><span class="nav-number">4.</span> <span class="nav-text">四 查看zookeeper状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-遇到的问题"><span class="nav-number">5.</span> <span class="nav-text">五 遇到的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群规划"><span class="nav-number">2.</span> <span class="nav-text">集群规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Zookeeper信息"><span class="nav-number">3.</span> <span class="nav-text">配置Zookeeper信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动Zookeeper"><span class="nav-number">4.</span> <span class="nav-text">启动Zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看zookeeper状态"><span class="nav-number">5.</span> <span class="nav-text">查看zookeeper状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">6.</span> <span class="nav-text">遇到的问题</span></a></li></ol></div>
             
 
           </div>
@@ -682,9 +694,11 @@ server.3=192.168.159.131:2888:3888
 
 -->
 
+<!--
 
   <span class="post-meta-divider">|</span>
 
+-->
 
 <!--
 
@@ -704,9 +718,17 @@ server.3=192.168.159.131:2888:3888
   <span class="post-meta-divider">|</span>
 
 
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+  <span class="post-meta-divider">|</span>
+
+
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.7k字</span>
+  <span class="post-count">博客全站共6.1k字</span>
 </div>
         
 

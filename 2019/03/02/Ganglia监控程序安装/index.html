@@ -82,13 +82,13 @@
 
 
 
-<meta name="description" content="Best or Nothing">
+<meta name="description" content="简介Ganglia 是 UC Berkeley 发起的一个开源监视项目，设计用于测量数以千计的节点。每台计算机都运行一个收集和发送度量数据（如处理器速度、内存使用量等）的名为 gmond 的守护进程。它将从操作系统和指定主机中收集。接收所有度量数据的主机可以显示这些数据并且可以将这些数据的精简表单传递到层次结构中。正因为有这种层次结构模式，才使得 Ganglia 可以实现良好的扩展。gmond 带">
 <meta name="keywords" content="Ganglia,监控,Hadoop,HBase">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ganglia监控程序安装">
 <meta property="og:url" content="http://yoursite.com/2019/03/02/Ganglia监控程序安装/index.html">
 <meta property="og:site_name" content="MaoConghui">
-<meta property="og:description" content="Best or Nothing">
+<meta property="og:description" content="简介Ganglia 是 UC Berkeley 发起的一个开源监视项目，设计用于测量数以千计的节点。每台计算机都运行一个收集和发送度量数据（如处理器速度、内存使用量等）的名为 gmond 的守护进程。它将从操作系统和指定主机中收集。接收所有度量数据的主机可以显示这些数据并且可以将这些数据的精简表单传递到层次结构中。正因为有这种层次结构模式，才使得 Ganglia 可以实现良好的扩展。gmond 带">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/1.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/2.png?raw=true">
@@ -98,15 +98,16 @@
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/6.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/7.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/8.png?raw=true">
+<meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/14.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/9.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/10.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/11.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/12.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/13.png?raw=true">
-<meta property="og:updated_time" content="2019-03-26T09:13:08.917Z">
+<meta property="og:updated_time" content="2019-03-27T06:02:07.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ganglia监控程序安装">
-<meta name="twitter:description" content="Best or Nothing">
+<meta name="twitter:description" content="简介Ganglia 是 UC Berkeley 发起的一个开源监视项目，设计用于测量数以千计的节点。每台计算机都运行一个收集和发送度量数据（如处理器速度、内存使用量等）的名为 gmond 的守护进程。它将从操作系统和指定主机中收集。接收所有度量数据的主机可以显示这些数据并且可以将这些数据的精简表单传递到层次结构中。正因为有这种层次结构模式，才使得 Ganglia 可以实现良好的扩展。gmond 带">
 <meta name="twitter:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/1.png?raw=true">
 
 
@@ -413,166 +414,107 @@
       
 
       
-        <blockquote>
-<p>Best or Nothing</p>
-</blockquote>
- <a id="more"></a> 
-<h2 id="一-配置环境及规划"><a href="#一-配置环境及规划" class="headerlink" title="一 配置环境及规划"></a>一 配置环境及规划</h2><table>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Ganglia 是 UC Berkeley 发起的一个开源监视项目，设计用于测量数以千计的节点。每台计算机都运行一个收集和发送度量数据（如处理器速度、内存使用量等）的名为 gmond 的守护进程。它将从操作系统和指定主机中收集。接收所有度量数据的主机可以显示这些数据并且可以将这些数据的精简表单传递到层次结构中。正因为有这种层次结构模式，才使得 Ganglia 可以实现良好的扩展。gmond 带来的系统负载非常少，这使得它成为在集群中各台计算机上运行的一段代码，而不会影响用户性能。</p>
+<p>所有这些数据收集会多次影响节点性能。网络中的 “抖动（Jitter）” 发生在大量小消息同时出现时。我们发现通过将节点时钟保持一致，就可以避免这个问题。</p>
+<a id="more"></a>
+<h2 id="配置环境及规划"><a href="#配置环境及规划" class="headerlink" title="配置环境及规划"></a>配置环境及规划</h2><table>
 <thead>
 <tr>
-<th>主机名</th>
-<th>IP</th>
-<th>集群规划</th>
+<th style="text-align:center">主机名</th>
+<th style="text-align:center">IP</th>
+<th style="text-align:center">集群规划</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>hadoop1</td>
-<td>192.168.159.129</td>
-<td>NameNode、Zookeeper、ResourceManager、HMaster、HRegionServer、gmetad、gmond、gweb</td>
+<td style="text-align:center">hadoop1</td>
+<td style="text-align:center">192.168.159.129</td>
+<td style="text-align:center">NameNode、Zookeeper、ResourceManager、HMaster、HRegionServer、gmetad、gmond、gweb</td>
 </tr>
 <tr>
-<td>hadoop2</td>
-<td>192.168.159.130</td>
-<td>NameNode、Zookeeper、ResourceManager、HMaster、HRegionServer、gmond</td>
+<td style="text-align:center">hadoop2</td>
+<td style="text-align:center">192.168.159.130</td>
+<td style="text-align:center">NameNode、Zookeeper、ResourceManager、HMaster、HRegionServer、gmond</td>
 </tr>
 <tr>
-<td>hadoop3</td>
-<td>192.168.159.131</td>
-<td>DataNode、Zookeeper、NodeManager、HRegionServer、gmond</td>
+<td style="text-align:center">hadoop3</td>
+<td style="text-align:center">192.168.159.131</td>
+<td style="text-align:center">DataNode、Zookeeper、NodeManager、HRegionServer、gmond</td>
 </tr>
 </tbody>
 </table>
-<h2 id="二-安装过程"><a href="#二-安装过程" class="headerlink" title="二 安装过程"></a>二 安装过程</h2><h4 id="1-下载Ganglia及其依赖包"><a href="#1-下载Ganglia及其依赖包" class="headerlink" title="1 下载Ganglia及其依赖包"></a>1 下载Ganglia及其依赖包</h4><p>在集群的三个节点上分别下载Ganglia及其依赖包，通过yum只下载不安装，需要安装一个yum的插件。</p>
-<pre><code># yum install yum-downloadonly
-</code></pre><p>安装完毕之后下载需要安装的rpm包以及依赖</p>
-<pre><code># yum install rrdtool httpd php ganglia* libconfuse --downloadonly --downloaddir=/home
-</code></pre><h4 id="2-安装Ganglia到监控端"><a href="#2-安装Ganglia到监控端" class="headerlink" title="2 安装Ganglia到监控端"></a>2 安装Ganglia到监控端</h4><p>在hadoop1上安装ganglia-gmetad、ganglia-web、php、httpd组件</p>
-<pre><code># yum install rrdtool httpd php ganglia-gmetad ganglia-gmond ganglia-web
-</code></pre><blockquote>
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><h3 id="下载Ganglia及其依赖包"><a href="#下载Ganglia及其依赖包" class="headerlink" title="下载Ganglia及其依赖包"></a>下载Ganglia及其依赖包</h3><p>在集群的三个节点上分别下载Ganglia及其依赖包，通过yum只下载不安装，需要安装一个yum的插件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum install yum-downloadonly</span></span><br></pre></td></tr></table></figure>
+<p>安装完毕之后下载需要安装的rpm包以及依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum install rrdtool httpd php ganglia* libconfuse --downloadonly --downloaddir=/home</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装Ganglia到监控端"><a href="#安装Ganglia到监控端" class="headerlink" title="安装Ganglia到监控端"></a>安装Ganglia到监控端</h3><p>在hadoop1上安装ganglia-gmetad、ganglia-web、php、httpd组件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum install rrdtool httpd php ganglia-gmetad ganglia-gmond ganglia-web</span></span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>注意：有监控端才需要安装ganglia-metad、ganglia-web、php和httpd，其他机器不用安装</p>
 </blockquote>
-<h4 id="3-安装Ganglia到被监控端"><a href="#3-安装Ganglia到被监控端" class="headerlink" title="3 安装Ganglia到被监控端"></a>3 安装Ganglia到被监控端</h4><p>在hadoop2和hadoop2上安装ganglia-gmond组件</p>
-<pre><code># yum install ganglia-gmond
-</code></pre><blockquote>
+<h3 id="安装Ganglia到被监控端"><a href="#安装Ganglia到被监控端" class="headerlink" title="安装Ganglia到被监控端"></a>安装Ganglia到被监控端</h3><p>在hadoop2和hadoop2上安装ganglia-gmond组件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum install ganglia-gmond</span></span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>注意：被监控端只需要安装ganglia-gmond，不需要安装ganglia的其他组件。</p>
 </blockquote>
-<h2 id="三-配置过程"><a href="#三-配置过程" class="headerlink" title="三 配置过程"></a>三 配置过程</h2><h4 id="1-配置监控端的ganglia-metad和ganglia-web"><a href="#1-配置监控端的ganglia-metad和ganglia-web" class="headerlink" title="1 配置监控端的ganglia-metad和ganglia-web"></a>1 配置监控端的ganglia-metad和ganglia-web</h4><p>监控端端配置文件/etc/ganglia/gmetad.conf：主要是配置data_source参数。它设定了被监控端服务器的地址及端口，可以指定多个被监控端服务器：</p>
-<pre><code>data_source &quot;hadoop&quot; 15 192.168.159.129:8649 192.168.159.130:8649 192.168.159.131:8649
-</code></pre><p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/1.png?raw=true" alt="gametad.conf"></p>
+<h2 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h2><h3 id="配置监控端的ganglia-metad和ganglia-web"><a href="#配置监控端的ganglia-metad和ganglia-web" class="headerlink" title="配置监控端的ganglia-metad和ganglia-web"></a>配置监控端的ganglia-metad和ganglia-web</h3><p>监控端端配置文件/etc/ganglia/gmetad.conf：主要是配置data_source参数。它设定了被监控端服务器的地址及端口，可以指定多个被监控端服务器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_source &quot;hadoop&quot; 15 192.168.159.129:8649 192.168.159.130:8649 192.168.159.131:8649</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/1.png?raw=true" alt="gametad.conf"></p>
 <p>将/usr/share/ganglia目录软链接到/var/www/html目录下</p>
-<pre><code># ln -s /usr/share/ganglia /var/www/html
-</code></pre><p>修改web前端配置文件/var/www/html/ganglia/conf.php，指定gmetad中存储rrd图形的目录，以及rrdtool的位置：</p>
-<pre><code>$gmetad_root = &quot;/var/lib/ganglia&quot;;
-
-$rrds = &quot;$gmetad_root/rrds&quot;;
-
-define(&quot;RRDTOOL&quot;, &quot;/usr/bin/rrdtool&quot;);
-</code></pre><p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/2.png?raw=true" alt="conf.php"></p>
-<p>修改/etc/httpd/conf.d/ganglia.conf<br><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/3.png?raw=true" alt="ganglia.conf"></p>
-<h4 id="2-配置监控机器的ganglia-gmond"><a href="#2-配置监控机器的ganglia-gmond" class="headerlink" title="2 配置监控机器的ganglia-gmond"></a>2 配置监控机器的ganglia-gmond</h4><p>gmond.conf包括了几个部分：globals、cluster、udp_send_channel、udp_recv_channel等，如果只是想要Ganglia简单地运行，两个操作就可以了，两个操作都是在cluster配置段中进行修改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ln -s /usr/share/ganglia /var/www/html</span></span><br></pre></td></tr></table></figure>
+<p>修改web前端配置文件/var/www/html/ganglia/conf.php，指定gmetad中存储rrd图形的目录，以及rrdtool的位置：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$gmetad_root = <span class="string">"/var/lib/ganglia"</span>;</span><br><span class="line"></span><br><span class="line">$rrds = <span class="string">"$gmetad_root/rrds"</span>;</span><br><span class="line"></span><br><span class="line">define(<span class="string">"RRDTOOL"</span>, <span class="string">"/usr/bin/rrdtool"</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/2.png?raw=true" alt="conf.php"></p>
+<p>修改/etc/httpd/conf.d/ganglia.conf</p>
+<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/3.png?raw=true" alt="ganglia.conf"></p>
+<h3 id="配置监控机器的ganglia-gmond"><a href="#配置监控机器的ganglia-gmond" class="headerlink" title="配置监控机器的ganglia-gmond"></a>配置监控机器的ganglia-gmond</h3><p>gmond.conf包括了几个部分：globals、cluster、udp_send_channel、udp_recv_channel等，如果只是想要Ganglia简单地运行，两个操作就可以了，两个操作都是在cluster配置段中进行修改：</p>
 <p>修改cluster的名字，命名成“hadoop”与data_source一致</p>
-<pre><code>cluster {
-
-    name =&quot;hadoop&quot; # 和data_source中的名字一致
-
-    owner = &quot;unspecified&quot;
-
-    latlong = &quot;unspecified&quot;
-
-    url = &quot;unspecified&quot;
-
-}
-</code></pre><p>  <img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/4.png?raw=true" alt="gmond.conf-1"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cluster &#123;</span><br><span class="line"></span><br><span class="line">    name ="hadoop" # 和data_source中的名字一致</span><br><span class="line"></span><br><span class="line">    owner = "unspecified"</span><br><span class="line"></span><br><span class="line">    latlong = "unspecified"</span><br><span class="line"></span><br><span class="line">    url = "unspecified"</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  <img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/4.png?raw=true" alt="gmond.conf-1"></p>
 <p>修改接收和发送的地址，如下图所示。</p>
-<pre><code>udp_send_channel {
-
-    #bind_hostname = yes # Highly recommended, soon to be default.
-
-    #This option tells gmond to use a source address
-
-    #that resolves to the machine&apos;s hostname. Without
-
-    #this, the metrics may appear to come from any
-
-    #interface and the DNS names associated with
-
-    #those IPs will be used to create the RRDs.
-
-    #mcast_join = 239.2.11.71
-
-    host=192.168.159.129 # gmetad所在服务器的地址
-
-    port = 8649
-
-    ttl = 1
-
-}
-
-
-
-/* You can specify as many udp_recv_channels as you like as well. */
-
-udp_recv_channel {
-
-    #mcast_join = 239.2.11.71
-
-    port = 8649
-
-    #bind = 239.2.11.71
-
-    retry_bind = true
-
-    #Size of the UDP buffer. If you are handling lots of metrics you really
-
-    #should bump it up to e.g. 10MB or even higher.
-
-    #buffer = 10485760
-
-}
-</code></pre><p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/5.png?raw=true" alt="gmond.conf-2"></p>
-<h4 id="3-配置Hadoop"><a href="#3-配置Hadoop" class="headerlink" title="3 配置Hadoop"></a>3 配置Hadoop</h4><p>在Hadoop中，对Ganglia的兼容是很好的，在Hadoop的目录下/hadoop-2.7.2/etc/hadoop，我们可以找到hadoop-metrics2.properties文件，这里我们修改文件内容如下所示，</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">udp_send_channel &#123;</span><br><span class="line"></span><br><span class="line">    #bind_hostname = yes # Highly recommended, soon to be default.</span><br><span class="line"></span><br><span class="line">    #This option tells gmond to use a source address</span><br><span class="line"></span><br><span class="line">    #that resolves to the machine's hostname. Without</span><br><span class="line"></span><br><span class="line">    #this, the metrics may appear to come from any</span><br><span class="line"></span><br><span class="line">    #interface and the DNS names associated with</span><br><span class="line"></span><br><span class="line">    #those IPs will be used to create the RRDs.</span><br><span class="line"></span><br><span class="line">    #mcast_join = 239.2.11.71</span><br><span class="line"></span><br><span class="line">    host=192.168.159.129 # gmetad所在服务器的地址</span><br><span class="line"></span><br><span class="line">    port = 8649</span><br><span class="line"></span><br><span class="line">    ttl = 1</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">/* You can specify as many udp_recv_channels as you like as well. */</span><br><span class="line"></span><br><span class="line">udp_recv_channel &#123;</span><br><span class="line"></span><br><span class="line">    #mcast_join = 239.2.11.71</span><br><span class="line"></span><br><span class="line">    port = 8649</span><br><span class="line"></span><br><span class="line">    #bind = 239.2.11.71</span><br><span class="line"></span><br><span class="line">    retry_bind = true</span><br><span class="line"></span><br><span class="line">    #Size of the UDP buffer. If you are handling lots of metrics you really</span><br><span class="line"></span><br><span class="line">    #should bump it up to e.g. 10MB or even higher.</span><br><span class="line"></span><br><span class="line">    #buffer = 10485760</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/5.png?raw=true" alt="gmond.conf-2"></p>
+<h3 id="配置Hadoop"><a href="#配置Hadoop" class="headerlink" title="配置Hadoop"></a>配置Hadoop</h3><p>在Hadoop中，对Ganglia的兼容是很好的，在Hadoop的目录下/hadoop-2.7.2/etc/hadoop，我们可以找到hadoop-metrics2.properties文件，这里我们修改文件内容如下所示，</p>
 <p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/6.png?raw=true" alt="hadoop-metrics2.properties-1"></p>
-<p>  <img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/7.png?raw=true" alt="hadoop-metrics2.properties-2"></p>
-<h4 id="4-配置HBase"><a href="#4-配置HBase" class="headerlink" title="4 配置HBase"></a>4 配置HBase</h4><p>在HBase的目录下/hbase-1.2.4/conf，我们可以找到hadoop-metrics2-hbase.properties文件，这里我们修改文件内容如下所示  </p>
+<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/7.png?raw=true" alt="hadoop-metrics2.properties-2"></p>
+<h3 id="配置HBase"><a href="#配置HBase" class="headerlink" title="配置HBase"></a>配置HBase</h3><p>在HBase的目录下/hbase-1.2.4/conf，我们可以找到hadoop-metrics2-hbase.properties文件，这里我们修改文件内容如下所示  </p>
 <p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/8.png?raw=true" alt="hadoop-metrics2-hbase.properties"></p>
 <p>然后将这两个文件从hadoop1复制到hadoop2和hadoop3，替换掉其原有文件。</p>
-<h2 id="四-开启监控程序"><a href="#四-开启监控程序" class="headerlink" title="四 开启监控程序"></a>四 开启监控程序</h2><p>首先开启节点的gmond，开启的顺序为先开启发送节点的gmond，再开启其他节点的gmond，即本文先开启hadoop1的gmond，再开启hadoop2和hadoop3的gmond，命令如下：</p>
-<pre><code># systemctl start gmond
-</code></pre><p>然后开启主节点的gmetad，命令如下：</p>
-<pre><code># systemctl start gmetad
-</code></pre><p>最后开启主节点的httpd</p>
-<pre><code># systemctl start httpd
-</code></pre><h2 id="五-查看状态"><a href="#五-查看状态" class="headerlink" title="五 查看状态"></a>五 查看状态</h2><pre><code># systemctl status gmond -l
-
-# systemctl status gmetad -l
-
-# systemctl status httpd -l
-</code></pre><p>最后通过浏览<a href="http://192.168.159.129/ganglia查看监控程序。" target="_blank" rel="noopener">http://192.168.159.129/ganglia查看监控程序。</a>  </p>
-<h2 id="六-遇到的问题及解决办法"><a href="#六-遇到的问题及解决办法" class="headerlink" title="六 遇到的问题及解决办法"></a>六 遇到的问题及解决办法</h2><p>以下有些为在其他集群运行遇到的问题。</p>
-<p><strong>—–data_thread() for [hadoop] failed to contact node …—–</strong></p>
+<h2 id="开启监控程序"><a href="#开启监控程序" class="headerlink" title="开启监控程序"></a>开启监控程序</h2><p>首先开启节点的gmond，开启的顺序为先开启发送节点的gmond，再开启其他节点的gmond，即本文先开启hadoop1的gmond，再开启hadoop2和hadoop3的gmond，命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># systemctl start gmond</span></span><br></pre></td></tr></table></figure>
+<p>然后开启主节点的gmetad，命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># systemctl start gmetad</span></span><br></pre></td></tr></table></figure>
+<p>最后开启主节点的httpd</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># systemctl start httpd</span></span><br></pre></td></tr></table></figure>
+<h2 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># systemctl status gmond -l</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># systemctl status gmetad -l</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># systemctl status httpd -l</span></span><br></pre></td></tr></table></figure>
+<p>最后通过浏览<a href="http://192.168.159.129/ganglia查看监控程序。" target="_blank" rel="noopener">http://192.168.159.129/ganglia查看监控程序。</a></p>
+<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/14.png?raw=true" alt="ganglia-web">  </p>
+<h2 id="遇到的问题及解决办法"><a href="#遇到的问题及解决办法" class="headerlink" title="遇到的问题及解决办法"></a>遇到的问题及解决办法</h2><blockquote>
+<p>以下有些为在其他集群运行遇到的问题。</p>
+</blockquote>
+<p><strong>data_thread() for [hadoop] failed to contact node …</strong></p>
 <p>在查看gmetad状态时，出现如下错误</p>
 <p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/9.png?raw=true" alt="1"></p>
 <p>是因为节点的gmond未启动，可先查看对应节点的gmond的状态，若无错误，可能是gmond的启动顺序不当造成的，可按顺序重启gmond。</p>
-<pre><code># systemctl restart gmond     
-</code></pre><p><strong>—–Error creating UDP server on port 8649 bind=…—–</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># systemctl restart gmond</span></span><br></pre></td></tr></table></figure>
+<p><strong>Error creating UDP server on port 8649 bind=…</strong></p>
 <p>查看gmond的状态信息，若出现如下错误</p>
 <p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/10.png?raw=true" alt="2"></p>
 <p>是因为在gmond.conf配置文件中，udp_recv_channel的bind地址写错了，应该将接收的bind的地址写成当前节点的地址或者直接注释掉。</p>
-<p><strong>—–访问ganglia页面的时候出现Forbidden You don’t have permission to access /ganglia on this server.—–</strong></p>
+<p><strong>访问ganglia页面的时候出现Forbidden You don’t have permission to access /ganglia on this server.</strong></p>
 <p>解决的方法：<br>1、运行命令禁用SELinux：setenforce 0（查看SELinux命令：getenforce）<br>2、运行sudo vi /etc/httpd/conf.d/ganglia.conf，将Deny from all注释掉就可以了。<br>3、重启httpd：systemctl restart httpd</p>
-<p><strong>—–Failed to start The Apache HTTP Server.—–</strong></p>
+<p><strong>Failed to start The Apache HTTP Server.</strong></p>
 <p>启动httpd失败</p>
 <p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/11.png?raw=true" alt="3"></p>
 <p>原因是端口未开启，执行</p>
-<pre><code># fuser -k -n tcp 80
-</code></pre><p>之后便可启动了。</p>
-<p><strong>—–AH00558:httpd:Could not reliably determine the server’s fully qualified domain name,using … .Set the ‘ServerName’ directive globally to suppress this message.—–</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fuser -k -n tcp 80</span></span><br></pre></td></tr></table></figure>
+<p>之后便可启动了。</p>
+<p><strong>AH00558:httpd:Could not reliably determine the server’s fully qualified domain name,using … .Set the ‘ServerName’ directive globally to suppress this message.</strong></p>
 <p>在查看http状态时出现如下信息</p>
 <p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/12.png?raw=true" alt="4"></p>
 <p>在/etc/httpd/conf.d/httpd.conf中加上ServerName 192.110.10.120</p>
-<p><strong>—–(code=exited, status=1/FAILURE)—–</strong></p>
-<p> 在查看http状态时出现如下信息</p>
+<p><strong>(code=exited, status=1/FAILURE)</strong></p>
+<p>在查看http状态时出现如下信息</p>
 <p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/13.png?raw=true" alt="5"></p>
 <p>将/etc/httpd/conf/httpd.conf 中的Listen 8080改为80</p>
 
@@ -708,7 +650,7 @@ udp_recv_channel {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -730,7 +672,7 @@ udp_recv_channel {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -779,7 +721,7 @@ udp_recv_channel {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-配置环境及规划"><span class="nav-number">1.</span> <span class="nav-text">一 配置环境及规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-安装过程"><span class="nav-number">2.</span> <span class="nav-text">二 安装过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-下载Ganglia及其依赖包"><span class="nav-number">2.0.1.</span> <span class="nav-text">1 下载Ganglia及其依赖包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安装Ganglia到监控端"><span class="nav-number">2.0.2.</span> <span class="nav-text">2 安装Ganglia到监控端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-安装Ganglia到被监控端"><span class="nav-number">2.0.3.</span> <span class="nav-text">3 安装Ganglia到被监控端</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#三-配置过程"><span class="nav-number">3.</span> <span class="nav-text">三 配置过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-配置监控端的ganglia-metad和ganglia-web"><span class="nav-number">3.0.1.</span> <span class="nav-text">1 配置监控端的ganglia-metad和ganglia-web</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-配置监控机器的ganglia-gmond"><span class="nav-number">3.0.2.</span> <span class="nav-text">2 配置监控机器的ganglia-gmond</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-配置Hadoop"><span class="nav-number">3.0.3.</span> <span class="nav-text">3 配置Hadoop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-配置HBase"><span class="nav-number">3.0.4.</span> <span class="nav-text">4 配置HBase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-开启监控程序"><span class="nav-number">4.</span> <span class="nav-text">四 开启监控程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-查看状态"><span class="nav-number">5.</span> <span class="nav-text">五 查看状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-遇到的问题及解决办法"><span class="nav-number">6.</span> <span class="nav-text">六 遇到的问题及解决办法</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置环境及规划"><span class="nav-number">2.</span> <span class="nav-text">配置环境及规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装过程"><span class="nav-number">3.</span> <span class="nav-text">安装过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载Ganglia及其依赖包"><span class="nav-number">3.1.</span> <span class="nav-text">下载Ganglia及其依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Ganglia到监控端"><span class="nav-number">3.2.</span> <span class="nav-text">安装Ganglia到监控端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Ganglia到被监控端"><span class="nav-number">3.3.</span> <span class="nav-text">安装Ganglia到被监控端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置过程"><span class="nav-number">4.</span> <span class="nav-text">配置过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置监控端的ganglia-metad和ganglia-web"><span class="nav-number">4.1.</span> <span class="nav-text">配置监控端的ganglia-metad和ganglia-web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置监控机器的ganglia-gmond"><span class="nav-number">4.2.</span> <span class="nav-text">配置监控机器的ganglia-gmond</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Hadoop"><span class="nav-number">4.3.</span> <span class="nav-text">配置Hadoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置HBase"><span class="nav-number">4.4.</span> <span class="nav-text">配置HBase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启监控程序"><span class="nav-number">5.</span> <span class="nav-text">开启监控程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看状态"><span class="nav-number">6.</span> <span class="nav-text">查看状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题及解决办法"><span class="nav-number">7.</span> <span class="nav-text">遇到的问题及解决办法</span></a></li></ol></div>
             
 
           </div>
@@ -815,9 +757,11 @@ udp_recv_channel {
 
 -->
 
+<!--
 
   <span class="post-meta-divider">|</span>
 
+-->
 
 <!--
 
@@ -837,9 +781,17 @@ udp_recv_channel {
   <span class="post-meta-divider">|</span>
 
 
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+  <span class="post-meta-divider">|</span>
+
+
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.7k字</span>
+  <span class="post-count">博客全站共6.1k字</span>
 </div>
         
 
