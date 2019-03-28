@@ -45,10 +45,10 @@
         <category>大数据集群</category>
       </categories>
       <tags>
-        <tag>Ganglia</tag>
-        <tag>监控</tag>
         <tag>Hadoop</tag>
         <tag>HBase</tag>
+        <tag>Ganglia</tag>
+        <tag>监控</tag>
       </tags>
   </entry>
   <entry>
