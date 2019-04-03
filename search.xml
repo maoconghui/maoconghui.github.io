@@ -8,7 +8,8 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
+        <tag>linux</tag>
+        <tag>shell脚本</tag>
       </tags>
   </entry>
   <entry>
@@ -19,8 +20,8 @@
         <category>大数据集群</category>
       </categories>
       <tags>
-        <tag>Hadoop</tag>
-        <tag>HBase</tag>
+        <tag>hadoop</tag>
+        <tag>hbase</tag>
       </tags>
   </entry>
   <entry>
@@ -31,8 +32,8 @@
         <category>大数据集群</category>
       </categories>
       <tags>
-        <tag>Hadoop</tag>
-        <tag>Zookeeper</tag>
+        <tag>hadoop</tag>
+        <tag>zookeeper</tag>
       </tags>
   </entry>
   <entry>
@@ -43,9 +44,9 @@
         <category>大数据集群</category>
       </categories>
       <tags>
-        <tag>Hadoop</tag>
-        <tag>NameNode</tag>
-        <tag>DataNode</tag>
+        <tag>hadoop</tag>
+        <tag>namenode</tag>
+        <tag>datanode</tag>
       </tags>
   </entry>
   <entry>
@@ -56,9 +57,9 @@
         <category>大数据集群</category>
       </categories>
       <tags>
-        <tag>Hadoop</tag>
-        <tag>HBase</tag>
-        <tag>Ganglia</tag>
+        <tag>hadoop</tag>
+        <tag>hbase</tag>
+        <tag>ganglia</tag>
         <tag>监控</tag>
       </tags>
   </entry>
