@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="MaoConghui">
 <meta property="og:description" content="简介Apache ZooKeeper是Apache软件基金会的一个软件项目，他为大型分布式计算提供开源的分布式配置服务、同步服务和命名注册。 ZooKeeper曾经是Hadoop的一个子项目，但现在是一个独立的顶级项目。 ZooKeeper的架构通过冗余服务实现高可用性。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-27T03:34:00.715Z">
+<meta property="og:updated_time" content="2019-04-02T09:23:03.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop集群搭建之Zookeeper安装">
 <meta name="twitter:description" content="简介Apache ZooKeeper是Apache软件基金会的一个软件项目，他为大型分布式计算提供开源的分布式配置服务、同步服务和命名注册。 ZooKeeper曾经是Hadoop的一个子项目，但现在是一个独立的顶级项目。 ZooKeeper的架构通过冗余服务实现高可用性。">
@@ -466,10 +466,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># jps</span></span><br></pre></td></tr></table></figure>
 <h2 id="查看zookeeper状态"><a href="#查看zookeeper状态" class="headerlink" title="查看zookeeper状态"></a>查看zookeeper状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ./zkServer.sh status</span></span><br></pre></td></tr></table></figure>
 <p>根据paxos选举规则，可以得到一个master，两个slave</p>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p><strong>Zookeeper状态显示Error contacting service. It is probably not running.</strong></p>
-<p>查看配置是否出错，myid是否写错。</p>
-<p><strong>出现Error Contacting Service,It is probably not running.</strong></p>
-<p>Zookeeper开启的台数没有大于一半，</p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ul>
+<li><strong>Zookeeper状态显示Error contacting service. It is probably not running.</strong><br>查看配置是否出错，myid是否写错。</li>
+</ul>
+<ul>
+<li><strong>出现Error Contacting Service,It is probably not running.</strong><br>Zookeeper开启的台数没有大于一半，</li>
+</ul>
 
       
     </div>
@@ -599,7 +601,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -610,7 +612,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -621,7 +623,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

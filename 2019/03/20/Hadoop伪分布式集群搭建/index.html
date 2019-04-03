@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="MaoConghui">
 <meta property="og:description" content="简介Apache Hadoop是一款支持数据密集型分布式应用程序并以Apache 2.0许可协议发布的开源软件框架。它支持在商品硬件构建的大型集群上运行的应用程序。Hadoop是根据谷歌公司发表的MapReduce和Google文件系统的论文自行实现而成。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-27T06:13:46.986Z">
+<meta property="og:updated_time" content="2019-04-02T09:23:34.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop伪分布式集群搭建">
 <meta name="twitter:description" content="简介Apache Hadoop是一款支持数据密集型分布式应用程序并以Apache 2.0许可协议发布的开源软件框架。它支持在商品硬件构建的大型集群上运行的应用程序。Hadoop是根据谷歌公司发表的MapReduce和Google文件系统的论文自行实现而成。">
@@ -570,15 +570,10 @@
 <p>也可通过网页来查看</p>
 <p><a href="http://192.168.159.129:50070" target="_blank" rel="noopener">http://192.168.159.129:50070</a>          </p>
 <p><a href="http://192.168.159.129:8088" target="_blank" rel="noopener">http://192.168.159.129:8088</a></p>
-<h2 id="遇到的问题（不定时更新）"><a href="#遇到的问题（不定时更新）" class="headerlink" title="遇到的问题（不定时更新）"></a>遇到的问题（不定时更新）</h2><p><strong>DataNode启动失败</strong></p>
-<p>有两个原因：</p>
-<p>1、DataNode和NameNode的ClusterID不一致。是由于多次初始化namenode（即./hdfs namenode -format）造成的，每一次format，NameNode都会生成新的ClusterID，而DataNode还是保持原来的ClusterID。</p>
-<p>2、将hadoop1中的配置文件拷贝到其他节点中，文件权限未开启。</p>
-<p>原因1解决办法：</p>
-<p>1.复制hadoop2.7.2/dfs/name/current/VERSION文件中namenode的clusterID.</p>
-<p>2.用该clusterID把所有datanode节点机器中hadoop2.7.2/dfs/data/current/VERSION中的clusterID替换掉</p>
-<p>原因2解决办法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># chmod 777 -R /home/mch/hadoop2.6.0</span></span><br></pre></td></tr></table></figure>
+<h2 id="遇到的问题（不定时更新）"><a href="#遇到的问题（不定时更新）" class="headerlink" title="遇到的问题（不定时更新）"></a>遇到的问题（不定时更新）</h2><ul>
+<li><strong>DataNode启动失败</strong><br>有两个原因：<br>1、DataNode和NameNode的ClusterID不一致。是由于多次初始化namenode（即./hdfs namenode -format）造成的，每一次format，NameNode都会生成新的ClusterID，而DataNode还是保持原来的ClusterID。<br>2、将hadoop1中的配置文件拷贝到其他节点中，文件权限未开启。<br>原因1解决办法：<br>1.复制hadoop2.7.2/dfs/name/current/VERSION文件中namenode的clusterID.<br>2.用该clusterID把所有datanode节点机器中hadoop2.7.2/dfs/data/current/VERSION中的clusterID替换掉<br>原因2解决办法：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># chmod 777 -R /home/mch/hadoop2.6.0</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -710,7 +705,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -721,7 +716,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -732,7 +727,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

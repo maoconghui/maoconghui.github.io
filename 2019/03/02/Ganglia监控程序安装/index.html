@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/11.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/12.png?raw=true">
 <meta property="og:image" content="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/13.png?raw=true">
-<meta property="og:updated_time" content="2019-03-27T06:02:07.393Z">
+<meta property="og:updated_time" content="2019-04-02T09:22:16.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ganglia监控程序安装">
 <meta name="twitter:description" content="简介Ganglia 是 UC Berkeley 发起的一个开源监视项目，设计用于测量数以千计的节点。每台计算机都运行一个收集和发送度量数据（如处理器速度、内存使用量等）的名为 gmond 的守护进程。它将从操作系统和指定主机中收集。接收所有度量数据的主机可以显示这些数据并且可以将这些数据的精简表单传递到层次结构中。正因为有这种层次结构模式，才使得 Ganglia 可以实现良好的扩展。gmond 带">
@@ -504,31 +504,27 @@
 <h2 id="遇到的问题及解决办法"><a href="#遇到的问题及解决办法" class="headerlink" title="遇到的问题及解决办法"></a>遇到的问题及解决办法</h2><blockquote>
 <p>以下有些为在其他集群运行遇到的问题。</p>
 </blockquote>
-<p><strong>data_thread() for [hadoop] failed to contact node …</strong></p>
-<p>在查看gmetad状态时，出现如下错误</p>
-<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/9.png?raw=true" alt="1"></p>
-<p>是因为节点的gmond未启动，可先查看对应节点的gmond的状态，若无错误，可能是gmond的启动顺序不当造成的，可按顺序重启gmond。</p>
+<ul>
+<li><p><strong>data_thread() for [hadoop] failed to contact node …</strong><br>在查看gmetad状态时，出现如下错误<br><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/9.png?raw=true" alt="1"><br>是因为节点的gmond未启动，可先查看对应节点的gmond的状态，若无错误，可能是gmond的启动顺序不当造成的，可按顺序重启gmond。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># systemctl restart gmond</span></span><br></pre></td></tr></table></figure>
-<p><strong>Error creating UDP server on port 8649 bind=…</strong></p>
-<p>查看gmond的状态信息，若出现如下错误</p>
-<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/10.png?raw=true" alt="2"></p>
-<p>是因为在gmond.conf配置文件中，udp_recv_channel的bind地址写错了，应该将接收的bind的地址写成当前节点的地址或者直接注释掉。</p>
-<p><strong>访问ganglia页面的时候出现Forbidden You don’t have permission to access /ganglia on this server.</strong></p>
-<p>解决的方法：<br>1、运行命令禁用SELinux：setenforce 0（查看SELinux命令：getenforce）<br>2、运行sudo vi /etc/httpd/conf.d/ganglia.conf，将Deny from all注释掉就可以了。<br>3、重启httpd：systemctl restart httpd</p>
-<p><strong>Failed to start The Apache HTTP Server.</strong></p>
-<p>启动httpd失败</p>
-<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/11.png?raw=true" alt="3"></p>
-<p>原因是端口未开启，执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fuser -k -n tcp 80</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Error creating UDP server on port 8649 bind=…</strong><br>查看gmond的状态信息，若出现如下错误<br><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/10.png?raw=true" alt="2"><br>是因为在gmond.conf配置文件中，udp_recv_channel的bind地址写错了，应该将接收的bind的地址写成当前节点的地址或者直接注释掉。</p>
+</li>
+</ul>
+<ul>
+<li><strong>访问ganglia页面的时候出现Forbidden You don’t have permission to access /ganglia on this server.</strong><br>解决的方法：<br>1、运行命令禁用SELinux：setenforce 0（查看SELinux命令：getenforce）<br>2、运行sudo vi /etc/httpd/conf.d/ganglia.conf，将Deny from all注释掉就可以了。<br>3、重启httpd：systemctl restart httpd</li>
+</ul>
+<ul>
+<li><strong>Failed to start The Apache HTTP Server.</strong><br>启动httpd失败<br><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/11.png?raw=true" alt="3"><br>原因是端口未开启，执行<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fuser -k -n tcp 80</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <p>之后便可启动了。</p>
-<p><strong>AH00558:httpd:Could not reliably determine the server’s fully qualified domain name,using … .Set the ‘ServerName’ directive globally to suppress this message.</strong></p>
-<p>在查看http状态时出现如下信息</p>
-<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/12.png?raw=true" alt="4"></p>
-<p>在/etc/httpd/conf.d/httpd.conf中加上ServerName 192.110.10.120</p>
-<p><strong>(code=exited, status=1/FAILURE)</strong></p>
-<p>在查看http状态时出现如下信息</p>
-<p><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/13.png?raw=true" alt="5"></p>
-<p>将/etc/httpd/conf/httpd.conf 中的Listen 8080改为80</p>
+<ul>
+<li><strong>AH00558:httpd:Could not reliably determine the server’s fully qualified domain name,using … .Set the ‘ServerName’ directive globally to suppress this message.</strong><br>在查看http状态时出现如下信息<br><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/12.png?raw=true" alt="4"><br>在/etc/httpd/conf.d/httpd.conf中加上ServerName 192.110.10.120</li>
+</ul>
+<ul>
+<li><strong>(code=exited, status=1/FAILURE)</strong><br>在查看http状态时出现如下信息<br><img src="https://github.com/maoconghui/markdown_photos/blob/master/ganglia/13.png?raw=true" alt="5"><br>将/etc/httpd/conf/httpd.conf 中的Listen 8080改为80</li>
+</ul>
 
       
     </div>
@@ -658,7 +654,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -669,7 +665,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -680,7 +676,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
