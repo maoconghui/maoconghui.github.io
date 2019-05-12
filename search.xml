@@ -57,10 +57,10 @@
         <category>大数据集群</category>
       </categories>
       <tags>
-        <tag>hadoop</tag>
-        <tag>hbase</tag>
         <tag>ganglia</tag>
         <tag>监控</tag>
+        <tag>hadoop</tag>
+        <tag>hbase</tag>
       </tags>
   </entry>
 </search>
